@@ -1,5 +1,5 @@
 ---
-skill: encauzar
+skill: cauce
 etapa: 0
 nombre: Puerta de entrada
 gatillada_por: [persona]
@@ -10,7 +10,7 @@ escribe_fuera: [ticket]
 consulta: []
 ---
 
-# /encauzar — Puerta de entrada
+# /cauce — Puerta de entrada
 
 ## Propósito
 

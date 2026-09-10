@@ -50,7 +50,7 @@ sentidos: si A dice que gatilla a B, B tiene que decir que la gatilla A.
 
 ## Los cinco momentos de invocación humana
 
-`/encauzar` cuando nace la necesidad. `/construir` cuando alguien se sienta a implementar.
+`/cauce` cuando nace la necesidad. `/construir` cuando alguien se sienta a implementar.
 `/revisar` cuando alguien revisa, varias veces. `/verificar` cuando alguien prueba.
 `/desplegar` cuando alguien despliega.
 

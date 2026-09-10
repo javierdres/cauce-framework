@@ -63,7 +63,7 @@ largo de todos.
 
 Dependen de que producto adopte el hábito, y eso no se decreta.
 
-- [ ] `/encauzar`, `/definir` y `/especificar` implementadas
+- [ ] `/cauce`, `/definir` y `/especificar` implementadas
 - [ ] Expediente adoptado como única fuente de contexto
 
 ## 8. La validación de resultado

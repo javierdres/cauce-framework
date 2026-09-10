@@ -192,7 +192,7 @@ detiene a preguntar.
 
 ```mermaid
 flowchart TD
-    H1(["persona"]) ==> K0["/encauzar<br/>GATE 0"]
+    H1(["persona"]) ==> K0["/cauce<br/>GATE 0"]
     K0 --> K1["/definir"]
     K1 --> G1{"gate de producto"}
     G1 --> K2["/especificar"]
@@ -235,8 +235,8 @@ detienen la cadena hasta que alguien decide.
 
 | Skill | Etapa | La gatilla | Entrega | Escribe fuera, con aprobación |
 |---|---|---|---|---|
-| `/encauzar` | 0 | **Persona** | Expediente abierto y clasificado por tipo de trabajo | Ticket |
-| `/definir` | 1 | `/encauzar` | Problema, contexto, clasificación de datos | Ticket |
+| `/cauce` | 0 | **Persona** | Expediente abierto y clasificado por tipo de trabajo | Ticket |
+| `/definir` | 1 | `/cauce` | Problema, contexto, clasificación de datos | Ticket |
 | `/especificar` | 2 | `/definir` | Criterios de aceptación y de cumplimiento | Ticket |
 | `/refinar` | 3 | `/especificar` | Componentes, riesgos con dueño, plan de pruebas y observabilidad | Subtareas |
 | `/disenar` | 4 | `/refinar` | Alternativas contrastadas y decisión registrada | Registro de decisión |
@@ -256,7 +256,7 @@ inventa sobre la marcha, y los inventa distinto cada vez.
 ### Los cinco momentos de invocación humana
 
 La cadena la empiezan personas en cinco puntos, y solo cinco: cuando nace la necesidad
-(`/encauzar`), cuando alguien se sienta a construir (`/construir`), cuando alguien revisa
+(`/cauce`), cuando alguien se sienta a construir (`/construir`), cuando alguien revisa
 (`/revisar`), cuando alguien prueba (`/verificar`) y cuando alguien despliega (`/desplegar`).
 Todo lo demás lo encadena el framework.
 

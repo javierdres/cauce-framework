@@ -2,7 +2,7 @@
 skill: definir
 etapa: 1
 nombre: Definición
-gatillada_por: [encauzar]
+gatillada_por: [cauce]
 gatilla: [especificar]
 gate: gate de producto
 habilita_el_gate: Responsable de producto
