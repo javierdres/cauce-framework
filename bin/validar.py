@@ -1,4 +1,6 @@
 #!/usr/bin/env python3
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2026 Javier Núñez
 """Valida que las skills del framework declaren un contrato completo y coherente.
 
 Comprueba, por cada skill: que el frontmatter traiga todos los campos, que las
