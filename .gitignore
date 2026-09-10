@@ -1,0 +1,4 @@
+_*.html
+_mmd_*/
+__pycache__/
+.DS_Store
