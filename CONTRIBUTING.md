@@ -1,46 +1,45 @@
-# Contribuir a CAUCE
+# Contributing to CAUCE
 
-CAUCE está en uso y en mejora continua. Las contribuciones más valiosas son las que salen de
-haberlo aplicado, no de haberlo leído.
+CAUCE is in use and under continuous improvement. The most valuable contributions come from
+having applied it, not from having read it.
 
-## Qué aporta más
+## What helps most
 
-**Experiencias de adopción.** Qué etapa costó más implantar, cuál se saltaron y qué pasó, en
-qué tamaño de equipo. Eso vale más que una corrección de redacción.
+**Adoption experience.** Which stage was hardest to roll out, which one you skipped and what
+happened, at what team size. That is worth more than a wording fix.
 
-**Contratos de skill afinados.** Si al implementar una skill descubriste que le falta un
-límite o que hace algo que no debería, cámbialo y explica el caso que lo motivó.
+**Sharpened skill contracts.** If implementing a skill showed it is missing a limit, or doing
+something it should not, change it and explain the case that prompted it.
 
-**Antipatrones nuevos.** La sección de antipatrones creció desde errores reales. Si viste uno
-que no está, agrégalo con lo que costó.
+**New anti-patterns.** That section grew out of real mistakes. If you have seen one that is
+missing, add it with what it cost.
 
-## Qué no entra
+## What does not belong here
 
-Reglas de estándar concretas. El catálogo es de cada organización y vive en su propio
-repositorio: este marco define cómo se alimenta, no qué dice.
+Specific standard rules. The catalog belongs to each organisation and lives in its own
+repository: this framework defines how it is fed, not what it says.
 
-Ceremonias, cadencia o estimación. CAUCE describe el recorrido de un trabajo y quién habilita
-cada paso; la forma de organizar al equipo va por fuera.
+Ceremonies, cadence or estimation. CAUCE describes the journey of a piece of work and who
+clears each step; how you organise the team sits outside.
 
-Buenas prácticas genéricas sin una decisión detrás. Si no puedes rastrearla a algo que
-ocurrió, todavía no es material para este marco.
+Generic good practice with no decision behind it. If you cannot trace it to something that
+happened, it is not material for this framework yet.
 
-## Antes de abrir un pull request
+## Before opening a pull request
 
-Corre el validador. Comprueba que los contratos estén completos y que la cadena de disparo
-cierre en los dos sentidos.
-
-```
-python3 bin/validar.py
-```
-
-Si tocaste `CAUCE.md`, regenera el PDF.
+Run the validator. It checks the contracts are complete and the trigger chain closes both ways.
 
 ```
-python3 bin/generar_pdf.py CAUCE.md
+python3 bin/validate.py
 ```
 
-## Licencia de las contribuciones
+If you touched `CAUCE.md`, regenerate the PDF.
 
-Al enviar una contribución aceptas que se publique bajo las mismas licencias del repositorio:
-CC BY 4.0 para documentación y MIT para código. No hace falta firmar nada.
+```
+python3 bin/build_pdf.py CAUCE.md
+```
+
+## Licence of contributions
+
+By submitting a contribution you agree it is published under the repository's licences: CC BY
+4.0 for documentation and MIT for code. Nothing to sign.

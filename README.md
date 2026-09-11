@@ -1,98 +1,101 @@
 # CAUCE
 
-**Ciclo Asistido Unificado de Construcción y Entrega.** Un SDLC Framework con asistencia
-de IA: define las etapas del ciclo de vida del software, sus entradas y salidas, los puntos
-de control humano y los actores de cada una.
+**Cycle of Assisted, Unified Construction and Engineering.** An AI-assisted SDLC framework: it
+defines the stages of the software life cycle, their inputs and outputs, the human control
+points and the actors of each one.
 
-Agnóstico de empresa, dominio, lenguaje y plataforma.
+Agnostic of company, domain, language and platform.
 
-La asistencia de IA sin cauce es una crecida. Con cauce es un río.
+*Cauce* is Spanish for the bed of a river. AI assistance without a channel is a flood. With
+one, it is a river.
 
-## Por dónde empezar
+## Where to start
 
-[CAUCE.md](CAUCE.md) es el documento completo. Si tienes diez minutos, lee la sección 2
-(la puerta de entrada y el expediente) y la 6 (los actores, y la línea que separa lo que
-hace la IA de lo que hacen las personas).
+[CAUCE.md](CAUCE.md) is the full document. If you have ten minutes, read section 2 (the single
+entry point and the dossier) and section 6 (the actors, and the line between what the AI does
+and what people do).
 
-## Qué hay acá
+## What is here
 
 ```
-├── CAUCE.md            El framework completo
-├── skills/             Las 16 skills, cada una con su contrato
-├── plantillas/         Expediente, decisión de diseño, guion de QA, postmortem, regla
+├── CAUCE.md            The full framework
+├── skills/             The 16 skills, each with its contract
+├── templates/          Dossier, design decision, QA script, postmortem, rule
 ├── bin/
-│   ├── validar.py      Comprueba que los contratos estén completos y la cadena cierre
-│   └── generar_pdf.py  Regenera el PDF desde el Markdown
-├── adopcion/           Cómo implantarlo, paso a paso
-└── docs/CAUCE.pdf      El documento en PDF
+│   ├── validate.py     Checks the contracts are complete and the chain closes
+│   └── build_pdf.py    Regenerates the PDF from the Markdown
+├── adoption/           How to roll it out, step by step
+└── docs/CAUCE.pdf      The document as PDF
 ```
 
-## Qué NO hay acá, a propósito
+## What is deliberately not here
 
-**Las reglas de tu organización.** El catálogo de estándares es de cada organización y vive
-en su propio repositorio. Este marco define cómo se alimenta ese catálogo, no qué dice.
+**Your organisation's rules.** The standards catalog belongs to each organisation and lives in
+its own repository. This framework defines how that catalog is fed, not what it says.
 
-**Ceremonias, cadencia ni estimación.** CAUCE describe el recorrido de un trabajo y quién
-habilita cada paso. Scrum, Kanban o lo que uses para organizar al equipo sigue funcionando
-encima.
+**Ceremonies, cadence or estimation.** CAUCE describes the journey of a piece of work and who
+clears each step. Scrum, Kanban or whatever you use to organise the team keeps working on top.
 
-## Las skills
+**Skill implementations.** Every skill declares its contract: who triggers it, what it
+delivers, where it stops to ask. Wiring that to your tools is your part.
 
-Catorce de ciclo y dos transversales. Cada una declara en su frontmatter quién la gatilla,
-a quién gatilla, qué gate tiene, quién lo habilita, qué escribe fuera y qué consulta.
+## The skills
+
+Fourteen cycle skills and two cross-cutting ones. Each declares in its frontmatter who triggers
+it, what it triggers, which gate it has, who owns that gate, what it writes outside and what it
+consults.
 
 ```
-python3 bin/validar.py
+python3 bin/validate.py
 ```
 
-Comprueba que todos los contratos estén completos y que la cadena cierre en los dos
-sentidos: si A dice que gatilla a B, B tiene que decir que la gatilla A.
+Checks that every contract is complete and that the chain closes both ways: if A says it
+triggers B, B has to say it is triggered by A.
 
-## Los cinco momentos de invocación humana
+## The five moments of human invocation
 
-`/cauce` cuando nace la necesidad. `/construir` cuando alguien se sienta a implementar.
-`/revisar` cuando alguien revisa, varias veces. `/verificar` cuando alguien prueba.
-`/desplegar` cuando alguien despliega.
+`/cauce` when the need is born. `/build` when someone sits down to implement. `/review` when
+someone reviews, several times. `/verify` when someone tests. `/deploy` when someone deploys.
 
-Todo lo demás lo encadena el framework. Los mecanismos que dependen de que una persona
-recuerde invocarlos no ocurren.
+The framework chains everything else. Mechanisms that depend on a person remembering to invoke
+them do not happen.
 
-## Cómo adoptarlo
+## How to adopt it
 
-Ver [adopcion/](adopcion/README.md). El framework rinde desde el segundo paso; no hay que
-esperar a tenerlo completo.
+See [adoption/](adoption/README.md). The framework pays from the second step; there is no need
+to wait for the whole thing.
 
-## De dónde sale
+## Where it comes from
 
-CAUCE no es una síntesis bibliográfica. Sale de dirigir equipos de desarrollo y de ver, una y
-otra vez, los mismos cuatro problemas: la calidad dependiendo de quién usó el asistente ese
-día, las decisiones evaporándose entre conversaciones, la seguridad entrando tarde, y nadie
-capaz de responder qué vara se aplicó a un cambio.
+CAUCE is not a literature review. It comes from leading development teams and watching the same
+four problems repeat: quality depending on who used the assistant that day, decisions
+evaporating between conversations, security arriving late, and nobody able to answer which
+standard was applied to a change.
 
-Cada regla de este marco responde a algo que salió mal en la práctica. Los gates existen
-porque hubo automatismos que ejecutaron de más. Las tres incompatibilidades de roles existen
-porque un equipo chico con asistencia fuerte converge rápido, y a veces hacia el lado
-equivocado. La etapa 12 existe porque es fácil encontrar un catálogo de estándares vacío al
-lado de un merge request con ciento cincuenta comentarios de discusión.
+Every rule in this framework answers something that went wrong in practice. The gates exist
+because automation once executed more than it should have. The three role incompatibilities
+exist because a small team with strong assistance converges fast, and sometimes in the wrong
+direction. Stage 12 exists because it is easy to find an empty standards catalog next to a
+change carrying a hundred and fifty discussion comments.
 
-Es un marco vivo y está en uso y en mejora continua. Lo que hoy son contratos de skills va a
-seguir cambiando a medida que se aplique.
+It is a living framework, in use and under continuous improvement. What are skill contracts
+today will keep changing as it gets applied.
 
-## Autoría y licencia
+## Author and licence
 
-Autor y titular: **Javier Núñez**.
+Author and rights holder: **Javier Núñez**.
 
-| Qué | Licencia |
+| What | Licence |
 |---|---|
-| Documentación: `CAUCE.md`, `README.md`, `skills/`, `plantillas/`, `adopcion/`, `docs/` | [CC BY 4.0](LICENSE-DOCS) |
-| Código: `bin/` | [MIT](LICENSE) |
+| Documentation: `CAUCE.md`, `README.md`, `skills/`, `templates/`, `adoption/`, `docs/` | [CC BY 4.0](LICENSE-DOCS) |
+| Code: `bin/` | [MIT](LICENSE) |
 
-Puedes usar CAUCE en tu organización, adaptarlo y redistribuirlo, incluso comercialmente. Lo
-único que se pide es atribución.
+You may use CAUCE in your organisation, adapt it and redistribute it, including commercially.
+All that is asked is attribution.
 
-### Sobre el nombre
+### About the name
 
-La licencia cubre la obra, no el nombre. Si adaptas CAUCE para tu organización, úsalo con
-libertad. Si publicas un derivado con cambios sustanciales en las etapas, los gates o la
-separación entre lo que hace la IA y lo que hacen las personas, conviene que lleve otro nombre
-y mencione de dónde viene: así "CAUCE" sigue significando una sola cosa.
+The licence covers the work, not the name. If you adapt CAUCE for your organisation, use it
+freely. If you publish a derivative with substantial changes to the stages, the gates or the
+split between what the AI does and what people do, give it another name and mention where it
+came from: that way "CAUCE" keeps meaning one thing.

@@ -1,806 +1,792 @@
 # CAUCE
 
-### Ciclo Asistido Unificado de Construcción y Entrega
+### Cycle of Assisted, Unified Construction and Engineering
 
-**SDLC Framework con asistencia de IA.** Un marco de ciclo de vida de desarrollo de software
-—*Software Development Life Cycle*— que define las etapas, sus entradas y salidas, los puntos
-de control humano y los actores de cada una.
+**An AI-assisted SDLC framework.** A software development life cycle that defines the stages,
+their inputs and outputs, the human control points and the actors of each one.
 
-Documento técnico de referencia, agnóstico de empresa, dominio, lenguaje y plataforma.
+Technical reference document, agnostic of company, domain, language and platform.
 
-Cubre el recorrido completo: desde que una persona plantea una necesidad hasta que el sistema
-opera en producción, con la organización habiendo aprendido algo de haberlo hecho.
+It covers the whole journey: from someone raising a need to the system running in production,
+with the organisation having learned something from doing it.
 
-Una crecida y un río tienen la misma agua. La diferencia es el cauce.
+*Cauce* is Spanish for the bed of a river — the channel that gives water its direction. A
+flood and a river hold the same water. The difference is the channel.
 
 [TOC]
 
 ---
 
-## 1. La tesis
+## 1. The thesis
 
-La mayoría de los equipos ya usa asistentes de IA. Casi siempre de la misma forma: cada
-persona con su propio prompt, en su propia ventana, sin dejar rastro. El resultado se nota a
-los pocos meses.
+Most teams already use AI assistants. Almost always the same way: each person with their own
+prompt, in their own window, leaving no trace. The result shows within a few months.
 
-La calidad depende de quién usó el asistente ese día y de qué tan bien lo pidió. Las
-decisiones se evaporan, y el mismo debate vuelve tres semanas después en otro cambio. La
-seguridad y el cumplimiento entran cuando el código ya está escrito, que es el momento más
-caro. Y nada es auditable: no hay forma de responder qué vara se aplicó a un cambio, quién la
-aprobó, ni desde cuándo rige.
+Quality depends on who used the assistant that day and how well they asked. Decisions
+evaporate, and the same debate comes back three weeks later in another change. Security and
+compliance arrive once the code is written, which is the most expensive moment. And nothing is
+auditable: there is no way to answer which standard was applied to a change, who approved it,
+or since when it has been in force.
 
-CAUCE no agrega capacidades nuevas al asistente. Ordena las que ya existen en etapas con
-entrada, salida y responsable, con puntos explícitos donde decide una persona, y con
-mecanismos que convierten cada decisión y cada incidente en una vara reutilizable.
+CAUCE adds no new capability to the assistant. It orders the ones it already has into stages
+with an input, an output and an owner, with explicit points where a person decides, and with
+mechanisms that turn every decision and every incident into a reusable standard.
 
-La ganancia no viene de que el asistente haga más. Viene de que lo que hace quede, se
-encadene, y no dependa de que alguien se acuerde.
+The gain does not come from the assistant doing more. It comes from what it does sticking,
+chaining into the next step, and not depending on someone remembering.
 
-### Qué tipo de marco es, y qué no reemplaza
+### What kind of framework this is, and what it does not replace
 
-CAUCE es un **SDLC**: describe el ciclo de vida del producto de software, desde la necesidad
-hasta el retiro, con las etapas, los artefactos y los controles de cada tramo. Se ubica en la
-misma familia que los SDLC clásicos —cascada, iterativos, en V— y que las prácticas de
-integración y entrega continua.
+CAUCE is an **SDLC**: it describes the life cycle of a software product, from the need to
+retirement, with the stages, artefacts and controls of each leg. It sits in the same family as
+the classic life cycle models and as continuous integration and delivery practice.
 
-Lo que lo distingue de ellos es que **la asistencia de IA está en el diseño del ciclo y no
-encima de él**. En los marcos existentes la IA se agrega como herramienta que cada persona usa
-a discreción. Acá cada etapa declara qué produce la máquina, qué decide la persona y qué queda
-escrito para la siguiente.
+What sets it apart is that **AI assistance is in the design of the cycle, not layered on top of
+it**. In existing models the assistant is added as a tool each person uses at their own
+discretion. Here every stage declares what the machine produces, what the person decides, and
+what gets written down for the next stage.
 
-**No reemplaza la forma de organizar al equipo.** Scrum, Kanban o lo que la organización use
-para priorizar, planificar y coordinar sigue funcionando igual encima de CAUCE. Este marco no
-define ceremonias, ni cadencia, ni estimación, ni cómo se arma el backlog. Define el recorrido
-de un trabajo y quién habilita cada paso.
+**It does not replace how you organise the team.** Scrum, Kanban or whatever you use to
+prioritise, plan and coordinate keeps working on top of CAUCE. This framework defines no
+ceremonies, no cadence, no estimation, and no backlog shaping. It defines the journey of a
+piece of work and who clears each step.
 
-**Tampoco reemplaza las prácticas de ingeniería** que el equipo ya tenga. Integración
-continua, pruebas automatizadas, infraestructura como código y despliegue progresivo son
-insumos de las etapas 5 a 9, no alternativas a ellas.
+**It does not replace your engineering practices either.** Continuous integration, automated
+testing, infrastructure as code and progressive delivery are inputs to stages 5 through 9, not
+alternatives to them.
 
 ---
 
-## 2. Gate 0: la puerta de entrada
+## 2. Gate 0: the single entry point
 
-CAUCE tiene **una sola entrada**. Una persona plantea una necesidad, un requerimiento o un
-proyecto nuevo, y desde ahí se encadena todo lo demás.
+CAUCE has **one door**. A person raises a need, a request or a new project, and everything
+else chains from there.
 
 ```mermaid
 flowchart TD
-    H(["PERSONA<br/>plantea una necesidad,<br/>un requerimiento<br/>o un proyecto nuevo"]) --> S0["<b>GATE 0</b><br/>skill de entrada<br/>abre el expediente"]
-    S0 --> C{"¿Qué es?"}
-    C -->|"proyecto nuevo"| P["Cadena larga:<br/>etapas 1 a 12"]
-    C -->|"cambio sobre<br/>algo existente"| Q["Cadena corta:<br/>entra en la etapa 2 o 3<br/>con el expediente<br/>del sistema ya cargado"]
-    C -->|"incidente"| R["Cadena de operación:<br/>etapa 10, y cosecha<br/>en la etapa 12"]
-    P --> E["El expediente viaja<br/>por todas las etapas"]
+    H(["PERSON<br/>raises a need,<br/>a request<br/>or a new project"]) --> S0["<b>GATE 0</b><br/>entry skill<br/>opens the dossier"]
+    S0 --> C{"What is it?"}
+    C -->|"new project"| P["Long chain:<br/>stages 1 to 12"]
+    C -->|"change to<br/>something existing"| Q["Short chain:<br/>enters at stage 2 or 3<br/>with the system's dossier<br/>already loaded"]
+    C -->|"incident"| R["Operations chain:<br/>stage 10, harvesting<br/>at stage 12"]
+    P --> E["The dossier travels<br/>through every stage"]
     Q --> E
     R --> E
 ```
 
-Lo que la persona entrega en Gate 0 puede ser tan informal como una nota de voz transcrita o
-un correo reenviado. Lo que **no** puede faltar es quién lo pide y para qué. Todo lo demás lo
-levanta la primera etapa preguntando.
+What the person hands over at Gate 0 can be as informal as a transcribed voice note or a
+forwarded email. What **cannot** be missing is who is asking and what for. The first stage
+gathers everything else by asking.
 
-### El expediente
+### The dossier
 
-De Gate 0 sale un **expediente**: un artefacto único que acompaña al trabajo por todo el ciclo
-y va acumulando lo que cada etapa produce. Es lo que permite que las etapas se encadenen sin
-que nadie vuelva a tipear el contexto.
+Gate 0 produces a **dossier**: a single artefact that travels with the work through the whole
+cycle, accumulating what each stage produces. It is what lets the stages chain without anyone
+retyping the context.
 
-| Etapa que lo escribe | Qué agrega al expediente |
+| Stage that writes it | What it adds to the dossier |
 |---|---|
-| 0 · Entrada | Quién pide, para qué, y de qué tipo es el trabajo |
-| 1 · Definición | Problema, contexto, restricciones, clasificación de datos |
-| 2 · Requerimientos | Criterios de aceptación funcionales y no funcionales, requisitos de cumplimiento |
-| 3 · Refinamiento | Componentes afectados, riesgos con dueño, plan de pruebas y de observabilidad |
-| 4 · Diseño | Decisión de arquitectura, alternativas descartadas y por qué |
-| 5 · Desarrollo | Cambios propuestos, instrumentación, pruebas |
-| 6 · Revisión previa | Hallazgos resueltos, guion de verificación funcional |
-| 7 · Revisión del cambio | Hilos, decisiones, hallazgos publicados |
-| 8 · Verificación | Resultado por criterio |
-| 9 · Despliegue | Verificación posterior contra los criterios de la etapa 2 |
-| 10 · Operación | Incidentes, causas raíz, resultado de ensayos de continuidad |
-| 11 · Validación | Resultado contrastado contra el problema de la etapa 1 |
-| 12 · Aprendizaje | Reglas cosechadas, descartes con motivo, pendientes |
+| 0 · Entry | Who is asking, what for, and what type of work it is |
+| 1 · Definition | Problem, context, constraints, data classification |
+| 2 · Requirements | Functional and non-functional acceptance criteria, compliance requirements |
+| 3 · Refinement | Affected components, risks with owners, test and observability plans |
+| 4 · Design | Architecture decision, alternatives ruled out and why |
+| 5 · Development | Proposed changes, instrumentation, tests |
+| 6 · Pre-review | Findings resolved, functional verification script |
+| 7 · Change review | Threads, decisions, published findings |
+| 8 · Verification | Result per criterion |
+| 9 · Deployment | Post-deployment check against the stage 2 criteria |
+| 10 · Operations | Incidents, root causes, recovery drill results |
+| 11 · Validation | Outcome measured against the stage 1 problem |
+| 12 · Learning | Rules harvested, discards with their reason, pending decisions |
 
-El expediente es también el registro de auditoría. Responde qué se pidió, qué vara se aplicó,
-quién aprobó cada paso y con qué evidencia.
+The dossier is also the audit record. It answers what was asked for, which standard was
+applied, who approved each step, and on what evidence.
 
-### Qué se encadena solo y qué no
+### What chains on its own and what does not
 
-La cadena avanza sola entre etapas. **Se detiene en cada gate humano**, sin excepción.
+The chain advances by itself between stages. **It stops at every human gate**, without
+exception.
 
-Un ciclo que corre de punta a punta sin intervención no es este framework: es una fábrica de
-código sin dueño. Los gates son el producto, no el obstáculo.
-
----
-
-## 3. Principios
-
-Aplican a todas las etapas. Una implementación que rompe uno deja de ser CAUCE.
-
-**El asistente prepara, la persona decide.** El asistente hace el trabajo pesado: leer,
-correlacionar, redactar, verificar. Cada decisión con consecuencias es de una persona, y se
-toma sobre algo ya redactado.
-
-**Nada se ejecuta desatendido hacia sistemas compartidos.** Publicar un comentario, abrir un
-cambio, escribir en un ticket, tocar un ambiente, silenciar una alerta. Todo se muestra
-primero y se ejecuta con aprobación explícita, una por una. Aprobar una cosa no autoriza las
-otras.
-
-**Verificar antes de afirmar.** Ninguna afirmación sobre cómo funciona el sistema se sostiene
-en la memoria del asistente ni en documentación que puede estar vieja. Se comprueba contra el
-código, los datos o el ambiente. Si no se pudo comprobar, se dice.
-
-**Toda regla muestra de dónde salió.** Una norma sin enlace a la discusión o al incidente que
-la originó es la opinión de alguien con formato de norma.
-
-**Los descartes se registran.** Cuando alguien rechaza un hallazgo, el motivo queda escrito.
-Sin eso el asistente vuelve a levantarlo y el equipo aprende a ignorarlo, incluidos los
-hallazgos que sí importaban.
-
-**Las dependencias que faltan se nombran.** Si falta un acceso, un token o una fuente de
-datos, se dice cuál y se sigue con lo que sí se puede, marcando qué quedó sin cubrir.
-
-**Comprobar antes de crear.** Antes de abrir un ticket, un cambio o un comentario, se verifica
-si ya existe. Si existe, se actualiza. Nunca un duplicado.
-
-**Toda etapa entrega un artefacto verificable.** Una etapa cuya salida es "quedamos de
-acuerdo" no ocurrió.
-
-**El expediente es la única fuente de contexto.** Lo que no está en el expediente no existe
-para la etapa siguiente. Eso obliga a que el contexto quede escrito y no en la cabeza de
-quien estuvo en la reunión.
+A cycle that runs end to end without intervention is not this framework: it is a code factory
+with no owner. The gates are the product, not the obstacle.
 
 ---
 
-## 4. El ciclo completo
+## 3. Principles
+
+They apply to every stage. An implementation that breaks one stops being CAUCE.
+
+**The assistant prepares, the person decides.** The assistant does the heavy lifting: reading,
+correlating, drafting, checking. Every consequential decision belongs to a person, and is taken
+on something already written down.
+
+**Nothing runs unattended into shared systems.** Publishing a comment, opening a change,
+writing in a ticket, touching an environment, silencing an alert. All of it is shown first and
+executed on explicit approval, one at a time. Approving one thing does not authorise the rest.
+
+**Verify before asserting.** No claim about how the system works rests on the assistant's
+memory or on documentation that may be stale. It is checked against the code, the data or the
+environment. If it could not be checked, that gets said.
+
+**Every rule shows where it came from.** A standard with no link to the discussion or incident
+that produced it is someone's opinion in the shape of a norm.
+
+**Discards get recorded.** When someone rejects a finding, the reason is written down. Without
+that the assistant raises it again and the team learns to ignore it, including the findings
+that mattered.
+
+**Missing dependencies get named.** If an access, a token or a data source is missing, say
+which one and carry on with what you can, marking what was left uncovered.
+
+**Check before creating.** Before opening a ticket, a change or a comment, check whether it
+already exists. If it does, update it. Never a duplicate.
+
+**Every stage delivers a verifiable artefact.** A stage whose output is "we agreed" did not
+happen.
+
+**The dossier is the only source of context.** What is not in the dossier does not exist for
+the next stage. That forces the context to be written down instead of living in the head of
+whoever was in the meeting.
+
+---
+
+## 4. The cycle
 
 ```mermaid
 flowchart LR
-    A(["Gate 0<br/>puerta de<br/>entrada"]) --> P1
+    A(["Gate 0<br/>single<br/>entry point"]) --> P1
 
-    P1["<b>PRODUCTO</b><br/>1 · Definición<br/>2 · Requerimientos"]
-    P2["<b>INGENIERÍA</b><br/>3 · Refinamiento<br/>4 · Diseño<br/>5 · Desarrollo<br/>6 · Revisión previa<br/>7 · Revisión del cambio<br/>8 · Verificación funcional"]
-    P3["<b>OPERACIÓN</b><br/>9 · Despliegue<br/>10 · SRE y continuidad<br/>11 · Validación de resultado"]
-    P4["<b>APRENDIZAJE</b><br/>12 · Catálogo<br/>de estándares"]
+    P1["<b>PRODUCT</b><br/>1 · Definition<br/>2 · Requirements"]
+    P2["<b>ENGINEERING</b><br/>3 · Refinement<br/>4 · Design<br/>5 · Development<br/>6 · Pre-review<br/>7 · Change review<br/>8 · Functional verification"]
+    P3["<b>OPERATIONS</b><br/>9 · Deployment<br/>10 · SRE and continuity<br/>11 · Outcome validation"]
+    P4["<b>LEARNING</b><br/>12 · Standards<br/>catalog"]
 
-    P1 -->|"gate de producto"| P2
-    P2 -->|"gate de QA"| P3
+    P1 -->|"product gate"| P2
+    P2 -->|"QA gate"| P3
 
-    P2 -.->|"decisiones de revisión<br/>y de diseño"| P4
-    P3 -.->|"causas raíz"| P4
-    P3 -.->|"hipótesis que fallaron"| P1
-    P4 -.->|"vara preventiva<br/>y correctiva"| P2
-    P4 -.->|"criterios de<br/>operación"| P3
+    P2 -.->|"review and<br/>design decisions"| P4
+    P3 -.->|"root causes"| P4
+    P3 -.->|"hypotheses that failed"| P1
+    P4 -.->|"preventive and<br/>corrective standard"| P2
+    P4 -.->|"operating<br/>criteria"| P3
 ```
 
-Las flechas punteadas son el ciclo de aprendizaje. Una decisión tomada hoy en una revisión, o
-una causa raíz encontrada hoy en un incidente, se convierte en una vara que mañana se aplica
-sola, antes de escribir código.
+The dotted arrows are the learning loop. A decision taken today in a review, or a root cause
+found today in an incident, becomes a standard that tomorrow applies on its own, before any
+code is written.
 
-Que el catálogo entre también en el refinamiento es lo que hace que el estándar deje de ser
-solo correctivo. Un requerimiento que choca con una regla vigente se detecta antes de la
-primera línea.
+That the catalog also feeds refinement is what stops the standard from being merely corrective.
+A requirement that collides with a rule in force is caught before the first line.
 
 ---
 
-## 5. Las skills, nombradas
+## 5. The skills, named
 
-Catorce skills, todas en español. Los nombres son la propuesta de CAUCE; lo que no es
-negociable es el contrato de cada una: quién la gatilla, qué recibe, qué entrega, y dónde se
-detiene a preguntar.
+Fourteen cycle skills and two cross-cutting ones. The names are CAUCE's proposal; what is not
+negotiable is each one's contract: who triggers it, what it takes in, what it delivers, and
+where it stops to ask.
 
 ```mermaid
 flowchart TD
-    H1(["persona"]) ==> K0["/cauce<br/>GATE 0"]
-    K0 --> K1["/definir"]
-    K1 --> G1{"gate de producto"}
-    G1 --> K2["/especificar"]
-    K2 --> G2{"gate de requerimientos"}
-    G2 --> K3["/refinar"]
-    K3 --> G3{"gate técnico"}
-    G3 --> K4["/disenar"]
-    K4 --> G4{"gate de diseño"}
+    H1(["person"]) ==> K0["/cauce<br/>GATE 0"]
+    K0 --> K1["/define"]
+    K1 --> G1{"product gate"}
+    G1 --> K2["/specify"]
+    K2 --> G2{"requirements gate"}
+    G2 --> K3["/refine"]
+    K3 --> G3{"engineering gate"}
+    G3 --> K4["/design"]
+    K4 --> G4{"design gate"}
 
-    G4 --> H2(["developer"])
-    H2 ==> K5["/construir"]
-    K5 --> K6["/autorrevisar"]
-    K6 --> G5{"gate del autor"}
+    G4 --> H2(["builder"])
+    H2 ==> K5["/build"]
+    K5 --> K6["/self-review"]
+    K6 --> G5{"author gate"}
 
-    G5 --> H3(["revisor"])
-    H3 ==> K7["/revisar"]
-    K7 --> G6{"gate del revisor"}
-    K7 -.-> K13["/cosechar"]
+    G5 --> H3(["reviewer"])
+    H3 ==> K7["/review"]
+    K7 --> G6{"reviewer gate"}
+    K7 -.-> K13["/harvest"]
 
-    K6 --> K8["/verificar"]
-    G6 --> H4(["quien prueba"])
+    K6 --> K8["/verify"]
+    G6 --> H4(["tester"])
     H4 ==> K8
-    K8 --> G7{"gate de QA"}
+    K8 --> G7{"QA gate"}
 
-    G7 --> H5(["quien despliega"])
-    H5 ==> K9["/desplegar"]
-    K9 --> K10["/operar"]
-    K10 --> K11["/analizar-incidente"]
+    G7 --> H5(["deployer"])
+    H5 ==> K9["/deploy"]
+    K9 --> K10["/operate"]
+    K10 --> K11["/postmortem"]
     K11 -.-> K13
-    K9 --> K12["/validar-resultado"]
-    K12 --> G8{"gate de producto"}
-    K13 --> G9{"gate por regla"}
+    K9 --> K12["/validate-outcome"]
+    K12 --> G8{"product gate"}
+    K13 --> G9{"per-rule gate"}
 ```
 
-Las flechas gruesas salen de una persona: son los **cinco momentos de invocación humana**.
-Las delgadas las encadena el framework. Las punteadas alimentan el aprendizaje. Los rombos
-detienen la cadena hasta que alguien decide.
+Thick arrows come out of a person: those are the **five moments of human invocation**. Thin
+ones are chained by the framework. Dotted ones feed learning. Diamonds stop the chain until
+someone decides.
 
-### El contrato de cada skill
+### Each skill's contract
 
-| Skill | Etapa | La gatilla | Entrega | Escribe fuera, con aprobación |
+| Skill | Stage | Triggered by | Delivers | Writes outside, on approval |
 |---|---|---|---|---|
-| `/cauce` | 0 | **Persona** | Expediente abierto y clasificado por tipo de trabajo | Ticket |
-| `/definir` | 1 | `/cauce` | Problema, contexto, clasificación de datos | Ticket |
-| `/especificar` | 2 | `/definir` | Criterios de aceptación y de cumplimiento | Ticket |
-| `/refinar` | 3 | `/especificar` | Componentes, riesgos con dueño, plan de pruebas y observabilidad | Subtareas |
-| `/disenar` | 4 | `/refinar` | Alternativas contrastadas y decisión registrada | Registro de decisión |
-| `/construir` | 5 | **Persona** | Cambio implementado, instrumentado y con pruebas | Repositorios |
-| `/autorrevisar` | 6 | `/construir` | Hallazgos privados, propuesta de cambio, guion de QA | Cambio y guion |
-| `/revisar` | 7 | **Persona**, varias veces | Respuestas a hilos y hallazgos propios | Comentarios, uno por uno |
-| `/verificar` | 8 | **Persona**, con el guion de `/autorrevisar` | Resultado por criterio | Nada |
-| `/desplegar` | 9 | **Persona** | Verificación posterior contra los criterios | Producción |
-| `/operar` | 10 | Alerta o persona | Diagnóstico sostenido en fuentes | Alertas e incidentes |
-| `/analizar-incidente` | 10 | Cierre de incidente | Línea de tiempo y causa raíz | Documento |
-| `/validar-resultado` | 11 | `/desplegar`, tras el plazo fijado en la etapa 2 | Contraste contra el problema original | Ticket |
-| `/cosechar` | 12 | `/revisar` y `/analizar-incidente` | Reglas candidatas y tres listas | Catálogo, regla por regla |
+| `/cauce` | 0 | **Person** | Dossier opened and classified by type of work | Ticket |
+| `/define` | 1 | `/cauce` | Problem, context, data classification | Ticket |
+| `/specify` | 2 | `/define` | Acceptance and compliance criteria | Ticket |
+| `/refine` | 3 | `/specify` | Components, risks with owners, test and observability plans | Subtasks |
+| `/design` | 4 | `/refine` | Contrasted alternatives and a recorded decision | Decision record |
+| `/build` | 5 | **Person** | The change, implemented, instrumented and tested | Repositories |
+| `/self-review` | 6 | `/build` | Private findings, change proposal, QA script | Change and script |
+| `/review` | 7 | **Person**, several times | Thread answers and its own findings | Comments, one by one |
+| `/verify` | 8 | **Person**, with the `/self-review` script | Result per criterion | Nothing |
+| `/deploy` | 9 | **Person** | Post-deployment check against the criteria | Production |
+| `/operate` | 10 | Alert or person | Diagnosis grounded in sources | Alerts and incidents |
+| `/postmortem` | 10 | Incident closure | Timeline and root cause | Document |
+| `/validate-outcome` | 11 | `/deploy`, after the stage 2 window | Outcome against the original problem | Ticket |
+| `/harvest` | 12 | `/review` and `/postmortem` | Candidate rules and three lists | Catalog, rule by rule |
 
-Cada skill declara explícitamente **qué no hace**. Un asistente sin límites escritos los
-inventa sobre la marcha, y los inventa distinto cada vez.
+Every skill declares explicitly **what it does not do**. An assistant with no written limits
+invents them on the fly, and invents them differently every time.
 
-### Los cinco momentos de invocación humana
+### The five moments of human invocation
 
-La cadena la empiezan personas en cinco puntos, y solo cinco: cuando nace la necesidad
-(`/cauce`), cuando alguien se sienta a construir (`/construir`), cuando alguien revisa
-(`/revisar`), cuando alguien prueba (`/verificar`) y cuando alguien despliega (`/desplegar`).
-Todo lo demás lo encadena el framework.
+People start the chain at five points, and only five: when the need is born (`/cauce`), when
+someone sits down to build (`/build`), when someone reviews (`/review`), when someone tests
+(`/verify`) and when someone deploys (`/deploy`). The framework chains everything else.
 
-Eso importa porque **los mecanismos que dependen de que una persona recuerde invocarlos no
-ocurren**. El síntoma clásico es un catálogo de estándares vacío junto a cambios con cientos
-de comentarios de discusión: nadie se acordó de cosechar. Por eso `/cosechar` la gatilla
-`/revisar` en cada pasada, y no una persona.
+That matters because **mechanisms that depend on a person remembering to invoke them do not
+happen**. The classic symptom is an empty standards catalog next to changes carrying hundreds
+of discussion comments: nobody remembered to harvest.
 
-### Skills transversales
+### Cross-cutting skills
 
-Dos capacidades no pertenecen a una etapa y las consultan varias:
+Two capabilities belong to no single stage and several stages consult them:
 
-| Skill | Para qué | La consultan |
+| Skill | What for | Consulted by |
 |---|---|---|
-| `/consultar-catalogo` | Traer las reglas vigentes que aplican por ámbito y proyecto | `/refinar`, `/disenar`, `/autorrevisar`, `/revisar` |
-| `/registrar-falso-positivo` | Dejar por escrito un hallazgo que el equipo rechazó, y el motivo | `/autorrevisar`, `/revisar` |
-
-## 6. Los actores
-
-### La línea que separa a la IA de las personas
-
-Todo el framework se apoya en una división que no admite excepciones.
-
-**La IA produce y verifica. La persona juzga y autoriza.**
-
-Cuatro cosas hace siempre la IA, en todas las etapas:
-
-1. Leer y correlacionar todo lo que haga falta, sin cansarse ni saltarse partes.
-2. Redactar el borrador de cada artefacto, para que nadie parta de una hoja en blanco.
-3. Comprobar contra la fuente en vez de contra su memoria, y decir cuando no pudo comprobar.
-4. Encadenar la etapa siguiente arrastrando el expediente, para que el contexto no se retipee.
-
-Cuatro cosas hace siempre una persona, y la IA nunca:
-
-1. **Aceptar o rechazar en un gate.**
-2. **Elegir entre alternativas cuando hay que renunciar a algo.** Un compromiso entre costo,
-   plazo y alcance es una decisión de negocio, no un cálculo.
-3. **Autorizar cualquier escritura hacia un sistema compartido.**
-4. **Responder por el resultado.** La responsabilidad no se delega a una herramienta, y una
-   organización que lo intente descubre el problema en la primera auditoría.
-
-Cuando una de las cuatro de la derecha se corre a la izquierda, el framework deja de aplicar,
-aunque todo lo demás siga igual.
-
-### Los ocho roles
-
-Roles, no cargos. Una persona puede tener varios.
-
-| Rol | Qué habilita | Perfil |
-|---|---|---|
-| **Solicitante** | Nada. Es quien plantea la necesidad | Conoce el problema de primera mano. No necesita perfil técnico |
-| **Responsable de producto** | Gates 1, 2 y 11 | Decide qué se construye y qué no. Tolera que le digan que su hipótesis falló |
-| **Responsable técnico** | Gates 3 y 4 | Criterio de arquitectura y memoria del sistema. Capaz de rechazar una propuesta bien redactada |
-| **Constructor** | Gate 6, sobre su propio trabajo | Implementa. Sabe leer lo que la IA propone y detectar cuando está mal |
-| **Revisor** | Gate 7 | Persona distinta del constructor. Ejerce criterio, no relee lo que la IA ya dijo |
-| **Verificador** | Gate 8 | Prueba contra los criterios. Puede ser otro constructor del equipo |
-| **Responsable de operación** | Gate 9 y las acciones sobre producción | Sostiene el servicio. Decide revertir |
-| **Custodio del estándar** | Gate 12 | Aprueba reglas. En las reglas duras, el equipo completo |
-
-### Las tres incompatibilidades
-
-Un mismo nombre puede ocupar varios roles, salvo en tres casos. Estas son las que sostienen la
-independencia de criterio cuando el equipo es chico.
-
-**Quien construye no revisa ese mismo cambio.** Es la separación que evita que el asistente
-termine siendo el único revisor.
-
-**Quien propone una decisión de diseño no la acepta.** Una alternativa única presentada sin
-contraste, aprobada por quien la escribió, es una decisión que nadie tomó.
-
-**Quien construye no valida el resultado de negocio.** Nadie es buen juez de si su propio
-trabajo sirvió.
-
-### Quién participa en cada etapa
-
-| Etapa | La IA hace | La persona hace | Quién |
-|---|---|---|---|
-| 0 · Entrada | Clasifica el tipo de trabajo y abre el expediente | Plantea la necesidad | Solicitante |
-| 1 · Definición | Redacta el problema, marca ambigüedad, clasifica datos | Acepta el enunciado | Producto |
-| 2 · Requerimientos | Propone criterios y exige número en los no funcionales | Acepta los criterios | Producto y técnico |
-| 3 · Refinamiento | Mapea componentes leyendo el código, levanta riesgos | Asigna dueño a cada riesgo y acepta el desglose | Técnico |
-| 4 · Diseño | Plantea alternativas contrastadas y sus consecuencias | Elige una y responde por ella | Técnico, distinto de quien construirá |
-| 5 · Desarrollo | Implementa, instrumenta, escribe pruebas | Dirige y corrige | Constructor |
-| 6 · Revisión previa | Revisa en privado, redacta la propuesta y el guion de QA | Aprueba cada publicación | Constructor |
-| 7 · Revisión del cambio | Responde hilos, levanta hallazgos, cosecha | Confirma cada hallazgo antes de publicarlo | Revisor |
-| 8 · Verificación | Redacta el guion | Ejecuta y marca resultado | Verificador |
-| 9 · Despliegue | Compara con los criterios, propone revertir | Autoriza cada acción sobre producción | Operación |
-| 10 · Operación | Diagnostica con evidencia, redacta el postmortem | Decide qué se toca y qué se alerta | Operación |
-| 11 · Validación | Contrasta el resultado contra el problema original | Decide cerrar, iterar o revertir | Producto |
-| 12 · Aprendizaje | Redacta la regla candidata con su origen | Confirma que es una decisión del equipo | Custodio |
-
-### Cuántas personas
-
-Trece etapas y ocho roles no significan trece personas. Los roles se concentran, y las tres
-incompatibilidades son las que fijan el piso.
-
-**Mínimo viable: tres personas.** Una en producto, y dos técnicas que se alternan: cuando una
-construye, la otra revisa, y al revés. Con eso se cumplen las tres incompatibilidades. La
-operación la sostiene cualquiera de las dos técnicas.
-
-**Recomendado: cuatro o cinco.** Se agrega una persona dedicada a operación, que es el rol que
-peor se sostiene a tiempo parcial porque los incidentes no esperan. Y conviene separar al
-solicitante de producto, para que quien pide no sea quien aprueba.
-
-**Techo práctico: siete.** Por encima de eso los gates empiezan a hacer cola y el ciclo se
-frena esperando aprobaciones. Cuando un producto necesita más gente, conviene partirlo en dos
-ciclos con expedientes separados antes que engordar uno solo.
-
-Un ciclo tradicional que cubra el mismo alcance suele repartir estos ocho roles entre ocho o
-diez personas, con transferencia de contexto en cada traspaso. La reducción no viene de que
-alguien trabaje más: viene de que el contexto viaja en el expediente en vez de reconstruirse
-en cada reunión de traspaso.
-
-### Un aviso sobre el equipo chico
-
-Menos personas significa menos puntos de vista independientes. Un equipo reducido con
-asistencia fuerte converge rápido, y puede converger con mucha seguridad hacia una solución
-equivocada, porque el asistente redacta con la misma solvencia lo correcto y lo incorrecto.
-
-Las tres incompatibilidades existen justamente para eso. Un equipo que recorta gente y además
-las relaja no está aplicando CAUCE: está automatizando su propio sesgo, más rápido que antes.
+| `/catalog` | Fetch the rules in force that apply by scope and project | `/refine`, `/design`, `/self-review`, `/review` |
+| `/false-positive` | Record a finding the team rejected, and the reason | `/self-review`, `/review` |
 
 ---
 
-## 7. Las etapas
+## 6. The actors
 
-### Etapa 1 · Definición
+### The line between the AI and the people
 
-Convierte una necesidad en lenguaje de negocio en un enunciado que un equipo técnico pueda
-evaluar. La ejecuta producto.
+The whole framework rests on a split that admits no exceptions.
 
-El asistente redacta el enunciado desde notas, entrevistas o tickets de soporte, separando el
-problema observado de la solución que alguien ya imaginó: la mayoría de los requerimientos
-llegan con una solución adentro y sin el problema que la motivó. Marca la ambigüedad en vez de
-resolverla, devolviendo las dos lecturas posibles. Clasifica los datos en juego —personales,
-de salud, financieros, regulados— y esa clasificación acompaña al expediente hasta producción,
-determinando la profundidad de todas las etapas siguientes. Y busca antecedentes: tickets
-anteriores sobre lo mismo, decisiones ya tomadas, incidentes relacionados, reglas del catálogo
-que apliquen.
+**The AI produces and verifies. The person judges and authorises.**
 
-**Gate.** Producto aprueba. Nada avanza sin clasificación de datos.
+Four things the AI always does, at every stage:
 
-### Etapa 2 · Requerimientos
+1. Read and correlate whatever is needed, without tiring or skipping parts.
+2. Draft every artefact, so nobody starts from a blank page.
+3. Check against the source rather than against its memory, and say when it could not check.
+4. Chain the next stage carrying the dossier, so context is never retyped.
 
-Fija qué significa que esto esté terminado, en términos comprobables.
+Four things a person always does, and the AI never:
 
-El asistente propone criterios de aceptación verificables, y obliga a que los no funcionales
-lleven número: tiempo de respuesta, volumen esperado, disponibilidad exigida, ventana de
-recuperación tolerable. Sin número no se pueden verificar en la etapa 8 ni vigilar en la 10.
-Deriva de la clasificación de datos los requisitos de cumplimiento que aplican: retención,
-auditoría, cifrado, minimización, derechos del titular. Y señala qué criterios van a necesitar
-instrumentación, para que la etapa 3 los considere.
+1. **Accept or reject at a gate.**
+2. **Choose between alternatives when something has to be given up.** A trade-off between cost,
+   time and scope is a business decision, not a calculation.
+3. **Authorise any write into a shared system.**
+4. **Answer for the outcome.** Responsibility is not delegated to a tool, and an organisation
+   that tries finds out at the first audit.
 
-**Gate.** Un criterio no funcional sin número se devuelve.
+When one of the four on the right moves to the left, the framework stops applying, however
+unchanged everything else looks.
 
-### Etapa 3 · Refinamiento
+### The eight roles
 
-Convierte los requerimientos en trabajo ejecutable, con los riesgos sobre la mesa antes de
-escribir código.
+Roles, not job titles. One person can hold several.
 
-El asistente descompone en tareas con salida verificable, y mapea qué componentes toca
-**leyendo el código real**: un mapa hecho de memoria o de un diagrama viejo se equivoca justo
-en los sistemas que más han cambiado. Levanta los riesgos de seguridad y cumplimiento apoyado
-en la clasificación de datos y en las reglas duras vigentes. Detecta cuando el requerimiento
-choca con una regla vigente y lo plantea como decisión de producto. Propone el plan de pruebas
-y el **plan de observabilidad**: lo que no se instrumenta acá no existe en la etapa 10.
-
-**Gate.** Un riesgo sin dueño asignado bloquea el paso a desarrollo.
-
-### Etapa 4 · Diseño
-
-Fijar la decisión de arquitectura antes de escribir código, y dejarla registrada.
-
-Es la etapa donde la asistencia más rinde y más riesgo trae: el asistente propone una
-solución con la misma solvencia esté bien o mal fundada. Por eso se registra la decisión y no
-solo el resultado.
-
-El asistente plantea **al menos dos alternativas viables** con sus consecuencias, en vez de
-presentar una sola como si fuera la única. Nombra lo que cada alternativa cierra hacia el
-futuro, que suele pesar más que su costo de hoy. Cruza cada alternativa contra las reglas
-vigentes del catálogo y contra los patrones que el proyecto ya sostiene. Y redacta la decisión
-en un registro corto: qué se decidió, qué alternativas se descartaron y por qué, y qué haría
-falta para revisarla más adelante.
-
-**Gate.** Alguien que no redactó la propuesta acepta la decisión. Una alternativa única
-presentada sin contraste se devuelve.
-
-**Salida.** Registro de decisión de arquitectura, incorporado al expediente.
-
-Este registro es una de las mejores fuentes de la etapa 12: una decisión de diseño ya viene
-argumentada y contrastada, que es justo lo que a una regla suele faltarle.
-
-### Etapa 5 · Desarrollo
-
-Implementar dejando el rastro que las etapas siguientes necesitan. El asistente consulta el
-catálogo antes de proponer un patrón, instrumenta lo que el plan definió en el mismo cambio y
-no después, y escribe las pruebas junto con el código.
-
-### Etapa 6 · Revisión previa
-
-Primera de las dos revisiones. Es **privada**: su salida va al autor. Existe para que el
-cambio llegue depurado a la revisión humana.
-
-Identifica el ticket desde la rama y trae su definición sin editarla. Determina todos los
-repositorios que el cambio toca y verifica que ninguno quedó a medias. Corre linters y
-análisis estático. Verifica cada afirmación sobre convenciones contra el código real. Hace un
-pase completo de reglas duras si el cambio toca autenticación, autorización, aislamiento entre
-clientes o datos sensibles. Cruza los artefactos que van juntos: migraciones con su registro
-de cambios, instrumentación con el plan, documentación con el código. Compara **la rama
-completa contra la base**, no solo los últimos commits, contra los criterios de la etapa 2.
-Y redacta la propuesta de cambio y el guion de verificación funcional.
-
-**Gate.** El autor aprueba cada salida hacia un sistema compartido, una por una.
-
-### Etapa 7 · Revisión del cambio
-
-Que una persona distinta del autor valide el cambio, con apoyo. **Se ejecuta varias veces**
-mientras dura la revisión: una sola pasada al abrir el cambio llega antes de que existan las
-decisiones.
-
-Lee los hilos de todos los cambios del ticket y los separa en abiertos, que hay que responder,
-y **resueltos**, que son el insumo de la etapa 12. Verifica cada sugerencia de otro revisor
-contra el código real antes de apoyarla o cuestionarla. Levanta hallazgos con severidad,
-archivo y línea, y con el identificador de la regla cuando sale del catálogo: sin ese
-identificador nadie puede ir a discutir la regla, y discutirla es el mecanismo por el que el
-estándar mejora. Consulta el registro de falsos positivos antes de levantar algo ya rechazado.
-
-**Gate.** Cada hallazgo se presenta con una pregunta contrafactual, sobre si de verdad aplica
-o es un falso positivo, y se publica solo con confirmación.
-
-> **Por qué son dos revisiones y no una.** La previa es privada y existe para que el autor
-> corrija sin costo social. La del cambio es pública y existe para que otra persona ejerza
-> criterio. Fundirlas convierte al asistente en el revisor, que es exactamente lo que este
-> framework evita.
-
-### Etapa 8 · Verificación funcional
-
-Comprobar contra los criterios de la etapa 2, sobre el sistema funcionando. El asistente
-redacta el guion; no lo ejecuta ni lo da por aprobado.
-
-Un buen guion cumple seis cosas: una marca por **resultado comprobable** y no una por caso, de
-modo que un fallo señale qué falló; un bloque por componente afectado nombrando qué mirar en
-cada pantalla; la precondición escrita como una comprobación que quien prueba pueda hacer, con
-qué hacer si no se cumple; pasos ejecutables con las herramientas que ya tiene; las falsas
-alarmas conocidas dichas de antemano; y qué hacer con lo que no se puede probar en ese
-ambiente, que es dejarlo sin marcar y anotarlo, nunca darlo por fallido.
-
-**Gate.** Un criterio de la etapa 2 sin verificar bloquea el despliegue.
-
-### Etapa 9 · Despliegue y verificación posterior
-
-Poner el cambio en producción y comprobar con datos que se comporta como decían los criterios.
-
-El asistente reúne los pasos manuales que el despliegue exige, en vez de dejar que aparezcan
-durante la ventana. Compara el comportamiento observado contra los criterios no funcionales de
-la etapa 2 usando las fuentes de datos de la etapa 10: esa comparación es la razón por la que
-esos criterios tenían que llevar número. Vigila la ventana posterior buscando desviaciones
-respecto de la línea base previa, no de un umbral inventado. Si detecta desviación, presenta
-la evidencia y **propone** revertir; la decisión es humana.
-
-**Precondición.** Un procedimiento de reversión probado, no solo documentado.
-
-### Etapa 10 · Operación, SRE y continuidad
-
-Sostener el servicio, detectar antes que el usuario, y recuperar dentro de la ventana
-comprometida.
-
-#### Las fuentes de datos
-
-Un asistente sin acceso a datos de operación opina. Con acceso, diagnostica.
-
-| Fuente | Qué responde | Error frecuente |
+| Role | What they clear | Profile |
 |---|---|---|
-| Logs de aplicación | Qué hizo el sistema y con qué error | Tomar el log de un intermediario como si fuera el del origen |
-| Métricas | Cuánto y con qué latencia, en el tiempo | Mirar promedios y perder los percentiles altos, donde vive el problema |
-| Trazas distribuidas | Por dónde pasó una petición y dónde se fue el tiempo | No propagar el identificador de correlación y perder la cadena |
-| Logs de infraestructura | Qué hizo la plataforma bajo el servicio | Atribuir a la aplicación algo que fue rotación de nodos o red |
-| Registro de auditoría | Quién hizo qué, cuándo y sobre qué dato | Mezclarlo con los logs de aplicación y perder su valor probatorio |
-| Estado de dependencias externas | Si el problema es propio o heredado | Diagnosticar hacia adentro un fallo que era de un tercero |
+| **Requester** | Nothing. They raise the need | Knows the problem first hand. Needs no technical profile |
+| **Product owner** | Gates 1, 2 and 11 | Decides what gets built and what does not. Can take being told their hypothesis failed |
+| **Engineering lead** | Gates 3 and 4 | Architecture judgement and memory of the system. Able to reject a well-written proposal |
+| **Builder** | Gate 6, over their own work | Implements. Can read what the AI proposes and spot when it is wrong |
+| **Reviewer** | Gate 7 | Someone other than the builder. Exercises judgement rather than re-reading what the AI said |
+| **Verifier** | Gate 8 | Tests against the criteria. Can be another builder on the team |
+| **Operations owner** | Gate 9 and any action on production | Keeps the service up. Decides on rollback |
+| **Standard custodian** | Gate 12 | Approves rules. For hard rules, the whole team |
 
-Tres condiciones para que sirvan. **Identificador de correlación de punta a punta**, sin el
-cual cada fuente cuenta una historia distinta. **Una sola fuente de verdad por pregunta**:
-cuando dos tableros responden lo mismo con números distintos, el equipo deja de creerle a los
-dos. Y **retención declarada y suficiente**, que sale de los requisitos de cumplimiento de la
-etapa 2, porque un incidente que se investiga tres días después necesita datos de hace tres
-días.
+### The three incompatibilities
 
-#### Qué hace la asistencia
+One name can hold several roles, except in three cases. These are what keep judgement
+independent when the team is small.
 
-Correlaciona las fuentes a partir de un síntoma y distingue la causa del ruido, sosteniendo
-cada afirmación en la fuente que la puede probar. Compara el comportamiento actual contra la
-línea base previa al último cambio y lo vincula con el ticket que lo introdujo. Propone qué
-amerita alerta y, sobre todo, qué no: si al dispararse nadie va a hacer nada distinto, es un
-dato de tablero. Redacta el postmortem con la línea de tiempo reconstruida desde las fuentes,
-no desde la memoria de quien estuvo de turno. Y prepara el guion del ensayo de recuperación,
-comparando el resultado real contra la ventana comprometida.
+**Whoever builds does not review that same change.** This is the separation that stops the
+assistant from ending up as the only reviewer.
 
-#### Asegurar la operación
+**Whoever proposes a design decision does not accept it.** A single alternative presented
+without contrast, approved by the person who wrote it, is a decision nobody took.
 
-Cinco condiciones. Ninguna es exótica y casi ninguna se cumple entera.
+**Whoever builds does not validate the business outcome.** Nobody judges their own work well.
 
-**Reversión probada.** Un procedimiento que nunca se ejecutó es una hipótesis.
+### Who takes part in each stage
 
-**Ventanas de recuperación con número y con ensayo.** Cuánto se tolera estar caído y cuántos
-datos se tolera perder, declarados en la etapa 2 y medidos en un ensayo real.
+| Stage | The AI does | The person does | Who |
+|---|---|---|---|
+| 0 · Entry | Classifies the work, opens the dossier | Raises the need | Requester |
+| 1 · Definition | Drafts the problem, flags ambiguity, classifies data | Accepts the statement | Product |
+| 2 · Requirements | Proposes criteria, demands numbers on the non-functional ones | Accepts the criteria | Product and engineering |
+| 3 · Refinement | Maps components by reading the code, raises risks | Assigns an owner to each risk, accepts the breakdown | Engineering |
+| 4 · Design | Puts forward contrasted alternatives and their consequences | Picks one and answers for it | Engineering, not the builder |
+| 5 · Development | Implements, instruments, writes tests | Directs and corrects | Builder |
+| 6 · Pre-review | Reviews in private, drafts the proposal and QA script | Approves each publication | Builder |
+| 7 · Change review | Answers threads, raises findings, harvests | Confirms each finding before it is published | Reviewer |
+| 8 · Verification | Drafts the script | Runs it and records results | Verifier |
+| 9 · Deployment | Compares against criteria, proposes rollback | Authorises every action on production | Operations |
+| 10 · Operations | Diagnoses with evidence, drafts the postmortem | Decides what gets touched and what gets alerted | Operations |
+| 11 · Validation | Measures the outcome against the original problem | Decides to close, iterate or roll back | Product |
+| 12 · Learning | Drafts the candidate rule with its origin | Confirms it is a team decision | Custodian |
 
-**Dependencias externas con degradación definida.** Qué hace el sistema cuando un tercero no
-responde. Sin esa definición, la respuesta por defecto es propagar el fallo al usuario.
+### How many people
 
-**Aislamiento del alcance.** Que la falla de un componente no arrastre al resto. Se comprueba
-provocándola en un ambiente controlado.
+Thirteen stages and eight roles do not mean thirteen people. Roles concentrate, and the three
+incompatibilities are what set the floor.
 
-**Accesos de emergencia auditados.** Con rastro y con vencimiento. Un acceso de emergencia
-permanente es un acceso normal mal nombrado.
+**Viable minimum: three people.** One in product, and two engineers who alternate: when one
+builds, the other reviews, and the other way round. That satisfies all three
+incompatibilities. Either engineer can carry operations.
 
-### Etapa 11 · Validación de resultado
+**Recommended: four or five.** Add someone dedicated to operations, the role that survives
+part-time worst because incidents do not wait. And separate the requester from product, so the
+person asking is not the person approving.
 
-Volver a preguntar si el problema de la etapa 1 se resolvió.
+**Practical ceiling: seven.** Above that the gates start queuing and the cycle stalls waiting
+for approvals. When a product needs more people, split it into two cycles with separate
+dossiers rather than fattening one.
 
-Es la etapa que casi ningún ciclo tiene, y su ausencia explica por qué las organizaciones
-miden lo que entregaron y no lo que sirvió. Las etapas 8 y 9 comprueban que el sistema hace lo
-que los criterios decían. Ninguna comprueba que eso haya resuelto algo.
+A traditional cycle covering the same ground usually spreads these eight roles across eight or
+ten people, with a context handover at every step. The reduction does not come from anyone
+working more: it comes from context travelling in the dossier instead of being rebuilt in
+every handover meeting.
 
-Se ejecuta una vez que el cambio lleva en producción el tiempo suficiente para tener datos, y
-ese plazo se fija en la etapa 2 junto con los criterios.
+### A warning about small teams
 
-El asistente compara el comportamiento observado en producción contra el problema enunciado
-en la etapa 1, usando las fuentes de datos de la etapa 10 y los indicadores de negocio que
-correspondan. Distingue tres desenlaces y los nombra sin suavizarlos: el problema se resolvió,
-se resolvió a medias y qué quedó fuera, o no se resolvió y la hipótesis de la etapa 1 estaba
-equivocada.
+Fewer people means fewer independent viewpoints. A small team with strong assistance converges
+fast, and can converge with great confidence on the wrong answer, because the assistant writes
+the wrong thing as fluently as the right one.
 
-**Gate.** Producto acepta el resultado y decide: cerrar, iterar, o revertir la funcionalidad.
+The three incompatibilities exist for exactly that. A team that cuts headcount and also relaxes
+them is not applying CAUCE: it is automating its own bias, faster than before.
 
-**Salida.** Resultado contrastado contra el problema original, incorporado al expediente.
+---
 
-Este es el **segundo lazo de aprendizaje** del framework. El de la etapa 12 mejora cómo se
-construye; este mejora qué se decide construir. Una hipótesis de producto que falló es
-información tan valiosa como una causa raíz, y se pierde con la misma facilidad.
+## 7. The stages
 
-### Etapa 12 · Aprendizaje
+### Stage 1 · Definition
 
-Que lo aprendido sobreviva a la conversación o al turno donde se aprendió. **Dos fuentes, un
-mismo destino.**
+Turns a need in business language into a statement an engineering team can assess. Product runs
+it.
+
+The assistant drafts the statement separating the observed problem from the solution someone
+already imagined: most requests arrive with a solution inside and without the problem that
+motivated it. It flags ambiguity instead of resolving it, returning both possible readings. It
+classifies the data involved — personal, health, financial, regulated — and that classification
+travels with the dossier to production, setting the depth of every later stage. And it looks
+for precedent: earlier tickets, decisions already taken, related incidents, catalog rules that
+apply.
+
+**Gate.** Product accepts. Nothing moves on without a data classification.
+
+### Stage 2 · Requirements
+
+Settles what done means, in terms that can be checked.
+
+The assistant proposes acceptance criteria that can be verified, and demands numbers on the
+non-functional ones: response time, expected volume, required availability, tolerable recovery
+window. Without a number they cannot be verified in stage 8 or watched in stage 10. It derives
+the compliance requirements that follow from the data classification: retention, audit,
+encryption, minimisation, data subject rights. And it points out which criteria will need
+instrumentation, so stage 3 accounts for it.
+
+**Gate.** A non-functional criterion without a number goes back.
+
+### Stage 3 · Refinement
+
+Turns requirements into executable work, with the risks on the table before any code.
+
+The assistant breaks the work into tasks with verifiable outputs, and maps the affected
+components **by reading the actual code**: a map drawn from memory or from an old diagram is
+wrong precisely about the systems that changed the most. It raises security and compliance
+risks grounded in the data classification and the hard rules in force. It detects when a
+requirement collides with a rule in force and raises it as a product decision. It proposes the
+test plan and the **observability plan**: whatever is not instrumented here does not exist in
+stage 10.
+
+**Gate.** A risk without an owner blocks the move to development.
+
+### Stage 4 · Design
+
+Settles the architecture decision before any code, and puts it on the record.
+
+This is where assistance pays off most and carries most risk: the assistant proposes a solution
+as fluently whether it is well founded or not. That is why the decision is recorded, not just
+the result.
+
+It puts forward **at least two workable alternatives** with their consequences, rather than
+presenting one as if it were the only option. It names what each alternative closes off for the
+future, which usually weighs more than its cost today. It checks each one against the rules in
+force and against the patterns the project already holds. And it writes a short decision
+record: what was decided, what was ruled out and why, and what would have to change to revisit
+it.
+
+**Gate.** Someone who did not draft the proposal accepts the decision. A single alternative
+presented without contrast goes back.
+
+This record is one of the best sources for stage 12: a design decision already arrives argued
+and contrasted, which is exactly what a rule usually lacks.
+
+### Stage 5 · Development
+
+Implement, leaving the trail the later stages need. The assistant consults the catalog before
+proposing a pattern, instruments what the plan called for in the same change rather than
+afterwards, and writes the tests alongside the code.
+
+### Stage 6 · Pre-review
+
+First of the two reviews. It is **private**: its output goes to the author. It exists so the
+change reaches human review already cleaned up.
+
+It identifies the ticket from the branch and pulls its definition without editing it. It
+determines every repository the change touches and checks none was left half done. It runs
+linters and static analysis. It checks every claim about conventions against the actual code.
+It runs a full hard-rule pass if the change touches authentication, authorisation, tenant
+isolation or sensitive data. It cross-checks the artefacts that travel together: migrations
+with their changelog entry, instrumentation with the plan, documentation with the code. It
+compares **the whole branch against the base**, not just the latest commits, against the
+criteria from stage 2. And it drafts the change proposal and the functional verification
+script.
+
+**Gate.** The author approves every output into a shared system, one at a time.
+
+### Stage 7 · Change review
+
+Someone other than the author validates the change, with support. **It runs several times**
+while the review lasts: a single pass when the change opens arrives before the decisions exist.
+
+It reads the threads across every change in the ticket and splits them into open ones, which
+need answering, and **resolved** ones, which are the input for stage 12. It checks every
+suggestion from another reviewer against the actual code before backing it or pushing back. It
+raises findings with severity, file and line, and with the rule id when the finding comes from
+the catalog: without that id nobody can go and argue with the rule, and arguing with it is how
+the standard improves. It consults the false-positive record before raising something already
+rejected.
+
+**Gate.** Every finding is presented with an explicit counterfactual question — whether it
+really applies here or is a false positive — and is published only on confirmation.
+
+> **Why two reviews and not one.** The pre-review is private and exists so the author can fix
+> things at no social cost. The change review is public and exists so another person exercises
+> judgement. Merging them turns the assistant into the reviewer, which is exactly what this
+> framework avoids.
+
+### Stage 8 · Functional verification
+
+Check against the criteria from stage 2, on the running system. The assistant drafts the
+script; it neither runs it nor signs it off.
+
+A good script does six things: one checkbox per **verifiable result** rather than per case, so
+a failure points at what failed; one block per affected component, naming what to look at on
+each screen; the precondition written as a check the tester can perform, with what to do if it
+is not met; steps executable with the tools they already have; known false alarms stated up
+front; and what to do with whatever cannot be tested in that environment, which is to leave it
+unchecked and note it, never mark it failed.
+
+**Gate.** A stage 2 criterion left unverified blocks deployment.
+
+### Stage 9 · Deployment and post-deployment check
+
+Put the change in production and check with data that it behaves the way the criteria said.
+
+The assistant gathers the manual steps the deployment requires instead of letting them surface
+during the window. It compares observed behaviour against the non-functional criteria from
+stage 2 using the data sources from stage 10: that comparison is why those criteria had to
+carry a number. It watches the window afterwards for deviations from the previous baseline,
+not from an invented threshold. On detecting a deviation it presents the evidence and
+**proposes** a rollback; the decision is human.
+
+**Precondition.** A rollback procedure that has been exercised, not merely documented.
+
+### Stage 10 · Operations, SRE and continuity
+
+Keep the service up, detect before the user does, and recover inside the committed window.
+
+#### The data sources
+
+An assistant with no access to operational data offers opinions. With access, it diagnoses.
+
+| Source | What it answers | Common mistake |
+|---|---|---|
+| Application logs | What the system did and with what error | Taking an intermediary's log as if it were the origin's |
+| Metrics | How much and how fast, over time | Watching averages and losing the high percentiles, where the problem lives |
+| Distributed traces | Where a request went and where the time went | Not propagating the correlation id and losing the chain |
+| Infrastructure logs | What the platform did underneath the service | Blaming the application for node rotation or network |
+| Audit trail | Who did what, when, over which data | Mixing it with application logs and losing its evidential value |
+| External dependency status | Whether the problem is ours or inherited | Diagnosing inward a failure that belonged to a third party |
+
+Three conditions make them useful. A **correlation id propagated end to end**, without which
+each source tells a different story. **One source of truth per question**: when two dashboards
+answer the same question with different numbers, the team stops believing both. And **declared,
+sufficient retention**, which follows from the compliance requirements of stage 2, because an
+incident investigated three days later needs data from three days ago.
+
+#### What the assistance does
+
+It correlates the sources from a symptom and separates cause from noise, grounding every claim
+in the source that can prove it. It compares current behaviour against the baseline before the
+last change and links it to the ticket that introduced it. It proposes what deserves an alert
+and, above all, what does not: if nobody will do anything differently when it fires, it is a
+dashboard number. It drafts the postmortem with the timeline rebuilt from the sources, not
+from the memory of whoever was on call. And it prepares the recovery drill script, comparing
+the real result against the committed window.
+
+#### Securing operations
+
+Five conditions. None is exotic and almost none is met in full.
+
+**A rollback that has been exercised.** A procedure never run is a hypothesis.
+
+**Recovery windows with a number and a drill.** How long you tolerate being down and how much
+data you tolerate losing, declared in stage 2 and measured in a real drill.
+
+**External dependencies with defined degradation.** What the system does when a third party
+does not answer. Without that definition, the default answer is to pass the failure to the
+user.
+
+**Blast radius isolation.** That one component failing does not drag the rest. Proven by
+causing it in a controlled environment.
+
+**Audited emergency access.** With a trail and an expiry. Permanent emergency access is normal
+access under a misleading name.
+
+### Stage 11 · Outcome validation
+
+Go back and ask whether the problem from stage 1 was solved.
+
+This is the stage almost no cycle has, and its absence is why organisations measure what they
+shipped rather than what worked. Stages 8 and 9 check that the system does what the criteria
+said. Neither checks that this solved anything.
+
+It runs once the change has been in production long enough to have data, and that window is
+set in stage 2 alongside the criteria.
+
+The assistant compares observed behaviour in production against the problem stated in stage 1,
+using the data sources from stage 10 and whatever business indicators apply. It distinguishes
+three outcomes and names them without softening: the problem was solved, it was half solved and
+here is what was left out, or it was not solved and the stage 1 hypothesis was wrong.
+
+**Gate.** Product accepts the outcome and decides: close, iterate, or roll the feature back.
+
+This is the framework's **second learning loop**. The stage 12 loop improves how things get
+built; this one improves what gets decided. A product hypothesis that failed is as valuable as
+a root cause, and is lost just as easily.
+
+### Stage 12 · Learning
+
+Make what was learned outlive the conversation or the shift where it appeared. **Two sources,
+one destination.**
 
 ```mermaid
 flowchart LR
-    A["Hilos resueltos<br/>de una revisión"] --> C{"¿Decisión con<br/>desenlace explícito?"}
-    B["Causa raíz de<br/>un incidente"] --> C
-    C -->|no| D["Pendiente:<br/>se reporta, no se escribe"]
-    C -->|sí| E{"¿Vale fuera<br/>de este caso?"}
-    E -->|no| F["Arreglo puntual"]
-    E -->|sí| G{"¿Describe cómo está<br/>construido este proyecto?"}
-    G -->|sí| H["Documentación<br/>del proyecto"]
-    G -->|no| I{"¿Práctica genérica sin<br/>decisión propia detrás?"}
-    I -->|sí| J["Ya la cubre la base<br/>de la industria"]
-    I -->|no| K{"¿Ya existe<br/>en el catálogo?"}
-    K -->|sí| L["Se edita la existente:<br/>suma origen e historial"]
-    K -->|no| M["Regla candidata nueva"]
+    A["Resolved threads<br/>from a review"] --> C{"Decision with an<br/>explicit outcome?"}
+    B["Root cause of<br/>an incident"] --> C
+    C -->|no| D["Pending:<br/>reported, not written"]
+    C -->|yes| E{"Does it hold<br/>beyond this case?"}
+    E -->|no| F["One-off fix"]
+    E -->|yes| G{"Does it describe how<br/>this project is built?"}
+    G -->|yes| H["Project<br/>documentation"]
+    G -->|no| I{"Generic practice with no<br/>decision of our own?"}
+    I -->|yes| J["Already covered by<br/>the industry baseline"]
+    I -->|no| K{"Already in<br/>the catalog?"}
+    K -->|yes| L["Edit the existing one:<br/>add origin and history"]
+    K -->|no| M["New candidate rule"]
 ```
 
-Un incidente es tan buena fuente de reglas como una discusión, y suele dar reglas mejores:
-nadie discute una causa raíz que ya costó una caída.
+An incident is as good a source of rules as a discussion, and usually yields better ones:
+nobody argues with a root cause that already cost an outage.
 
-**Gate.** Cada regla se presenta con una pregunta contrafactual, sobre si es una decisión del
-equipo o el criterio general del asistente con un enlace pegado.
+**Gate.** Every rule is presented with a counterfactual question — whether it is a team
+decision or the assistant's general opinion with a link stapled to it.
 
-**Salida.** Reglas candidatas y un reporte con tres listas que se entrega siempre, aunque la
-primera venga vacía: cosechadas, descartadas con el motivo, y decisiones pendientes.
+**Output.** Candidate rules and a report with three lists, delivered every time even when the
+first is empty: harvested, discarded with the reason, and pending decisions.
 
-Una regla nace **sin poder de bloqueo**. Adquirirlo es una decisión humana explícita, y en las
-reglas de seguridad, del equipo completo. Eso evita que el asistente imponga varas que nadie
-acordó.
+A rule is born **with no blocking power**. Acquiring it is an explicit human decision, and for
+security rules, the whole team's. That stops the assistant from imposing standards nobody
+agreed to.
 
-### Etapa opcional · Retiro
+### Optional stage · Retirement
 
-Apagar un sistema o una funcionalidad tiene obligaciones que casi ningún ciclo cubre, y es
-donde se acumula riesgo de cumplimiento en silencio.
+Switching off a system or a feature carries obligations almost no cycle covers, and it is where
+compliance risk piles up quietly.
 
-Qué hay que resolver: qué datos deben conservarse y por cuánto tiempo, cuáles deben borrarse
-y con qué constancia, qué integraciones dependen de lo que se apaga, y quién queda como
-responsable del archivo histórico. La clasificación de datos de la etapa 1 es la que dice qué
-aplica.
+What has to be settled: which data must be kept and for how long, which must be deleted and
+with what evidence, which integrations depend on what is being switched off, and who owns the
+historical archive afterwards. The data classification from stage 1 says what applies.
 
-Se incorpora al framework cuando la organización tiene sistemas que efectivamente retira. Una
-organización que nunca apaga nada no necesita la etapa, y suele tener el problema de no
-apagar nunca nada.
+Adopt it when the organisation actually retires systems. One that never switches anything off
+does not need the stage, and usually has the problem of never switching anything off.
 
 ---
 
-## 8. Efecto sobre la organización
+## 8. Effect on the organisation
 
-### Dónde se va el tiempo hoy
+### Where the time goes today
 
-En un ciclo tradicional con apoyo nulo o limitado de IA, buena parte del esfuerzo no se gasta
-en decidir. Se gasta en producir y trasladar artefactos: redactar el ticket, volver a explicar
-el contexto en el refinamiento, leer el cambio completo para revisarlo, escribir el guion de
-pruebas, reconstruir a mano la línea de tiempo de un incidente, y redactar el postmortem que
-nadie va a releer.
+In a traditional cycle with no or limited AI support, much of the effort is not spent deciding.
+It is spent producing and carrying artefacts: drafting the ticket, explaining the context again
+at refinement, reading the whole change to review it, writing the test script, rebuilding an
+incident timeline by hand, and drafting the postmortem nobody will reread.
 
-Ese trabajo es necesario y es mecánico. Es exactamente donde la asistencia rinde.
+That work is necessary and it is mechanical. It is exactly where assistance pays.
 
-### Qué cambia con CAUCE
+### What changes with CAUCE
 
-El trabajo mecánico se colapsa y **el cuello de botella se mueve al juicio**. Lo que antes
-tomaba una tarde de redacción pasa a ser una revisión de algo ya redactado. Los gates dejan de
-ser trámite y pasan a ser el trabajo.
+Mechanical work collapses and **the bottleneck moves to judgement**. What used to take an
+afternoon of drafting becomes a review of something already drafted. The gates stop being
+paperwork and become the work.
 
-Eso tiene tres consecuencias que conviene decir sin adorno.
+That has three consequences worth stating plainly.
 
-**Un mismo equipo cubre más alcance.** No porque cada persona trabaje más, sino porque deja de
-producir artefactos intermedios a mano.
+**The same team covers more ground.** Not because anyone works more, but because they stop
+producing intermediate artefacts by hand.
 
-**Los roles se consolidan.** El límite entre quien refina y quien construye, o entre quien
-opera y quien diagnostica, se difumina cuando el contexto viaja en el expediente en vez de en
-la cabeza de una persona. Un equipo más chico puede sostener un producto que antes exigía
-varios roles separados.
+**Roles consolidate.** The line between whoever refines and whoever builds, or between whoever
+operates and whoever diagnoses, blurs once context travels in the dossier instead of in
+someone's head. A smaller team can sustain a product that used to demand several separate
+roles.
 
-**El costo de una decisión mala sube.** Cuando el asistente produce en minutos lo que antes
-tomaba días, un criterio equivocado se propaga igual de rápido. Por eso los gates son
-obligatorios y por eso las dos revisiones están separadas.
+**The cost of a bad decision rises.** When the assistant produces in minutes what used to take
+days, a wrong call propagates just as fast. That is why the gates are mandatory and why the two
+reviews are kept apart.
 
-### La advertencia
+### The warning
 
-Reducir personas es una consecuencia posible, no un objetivo del framework, y trae un riesgo
-concreto: menos personas significa menos puntos de vista independientes.
+Cutting headcount is a possible consequence, not a goal of the framework, and it carries a
+concrete risk: fewer people means fewer independent viewpoints.
 
-Un equipo chico con asistencia fuerte puede converger rápido hacia una solución equivocada, y
-convergir con mucha seguridad, porque el asistente redacta con la misma solvencia lo correcto
-y lo incorrecto.
+A small team with strong assistance can converge quickly on the wrong answer, and converge
+confidently, because the assistant writes the wrong thing as fluently as the right one.
 
-La contramedida está en el diseño: que la revisión previa y la del cambio nunca sean la misma
-persona, que los gates de producto y técnico los ejerza alguien que no escribió lo que se
-aprueba, y que ninguna regla llegue a bloquear sin aprobación del equipo. Si un equipo recorta
-gente y además relaja esos tres puntos, no está aplicando CAUCE: está automatizando su propio
-sesgo.
+The countermeasure is in the design: that pre-review and change review are never the same
+person, that the product and engineering gates are held by someone who did not write what is
+being approved, and that no rule reaches blocking status without the team's approval. A team
+that cuts people and also relaxes those three points is not applying CAUCE: it is automating
+its own bias.
 
 ---
 
-## 9. Qué mejora, y cómo se comprueba
+## 9. What improves, and how to check it
 
-Sin indicadores, esto es una opinión bien redactada.
+Without indicators, this is a well-written opinion.
 
-**Productividad.** Tiempo entre que un cambio está listo y entra a revisión. Tiempo hasta el
-diagnóstico de un incidente.
+**Productivity.** Time between a change being ready and entering review. Time to diagnose an
+incident.
 
-**Calidad.** Proporción de hallazgos que aparecen en la revisión previa contra los que llegan
-a la revisión humana. Si el segundo número no baja con el tiempo, el ciclo no está aprendiendo.
+**Quality.** The share of findings that surface in pre-review versus those that reach human
+review. If the second number does not fall over time, the cycle is not learning.
 
-**Seguridad.** Cuántos hallazgos de seguridad se detectan antes de escribir código.
+**Security.** How many security findings are caught before any code is written.
 
-**Cumplimiento.** Que se pueda responder, para cualquier cambio en producción, qué vara se le
-aplicó, con qué regla, en qué versión y aprobada por quién. Un catálogo versionado responde
-eso; una conversación con un asistente, no.
+**Compliance.** That for any change in production you can answer which standard was applied,
+with which rule, at which version, approved by whom. A versioned catalog answers that; a
+conversation with an assistant does not.
 
-**Continuidad.** Resultado de los ensayos de recuperación contra la ventana comprometida.
-Proporción de incidentes detectados por instrumentación propia antes que por un usuario.
+**Continuity.** Recovery drill results against the committed window. The share of incidents
+detected by your own instrumentation before a user reports them.
 
-**Aprendizaje.** Cuántas reglas entraron al catálogo por trimestre y cuántas discusiones
-repetidas dejaron de ocurrir. Un catálogo que no crece indica que la etapa 10 no se está
-ejecutando, sin importar lo que digan las otras once.
-
----
-
-## 10. Precondiciones
-
-- Credenciales personales por persona, nunca compartidas. Un token de equipo destruye la
-  trazabilidad de quién aprobó qué.
-- Copia local de todos los repositorios que el ciclo toca, incluido el de estándares.
-- El catálogo accesible por lectura mecánica, versionado y con un validador de formato.
-- Un lugar de baja fricción para registrar falsos positivos, fuera del proceso de aprobación
-  de reglas. Si registrar un falso positivo costara una aprobación, nadie lo registraría.
-- Convención de ramas que enlace con el ticket, para resolver la trazabilidad sin preguntar.
-- Identificador de correlación propagado de punta a punta, y retención de datos declarada.
-- Un lugar donde viva el expediente, legible por personas y por máquina.
+**Learning.** How many rules entered the catalog per quarter, and how many repeated discussions
+stopped happening. A catalog that does not grow means stage 12 is not running, whatever the
+other eleven say.
 
 ---
 
-## 11. Adopción
+## 10. Preconditions
 
-En este orden. Cada paso funciona sin los siguientes, y ninguno exige tener el anterior
-perfecto.
-
-1. **El catálogo de estándares, vacío.** Con formato de regla, validador y catálogo generado.
-   Vacío a propósito: un set copiado de una guía de la industria describe a quien lo copió.
-2. **La revisión previa.** Es la que más devuelve por lo que cuesta y no obliga a nadie más a
-   cambiar su forma de trabajar.
-3. **La revisión del cambio, con la cosecha adentro.** Las dos juntas. Una revisión asistida
-   que no cosecha deja el ciclo abierto.
-4. **El guion de verificación funcional.** Barato, y separa con claridad revisión de QA.
-5. **El refinamiento y el diseño.** Cuando el catálogo ya tiene reglas que valga la pena
-   consultar antes de decidir una arquitectura.
-6. **Operación y SRE.** Requiere que las fuentes de datos existan y sean confiables, que suele
-   ser el trabajo más largo de todos.
-7. **Gate 0, definición y requerimientos.** Dependen de que producto adopte el hábito, y eso
-   no se decreta.
-8. **La validación de resultado.** La última, porque exige tener datos de negocio confiables
-   y la disposición a registrar que una hipótesis falló.
-
-El framework rinde desde el paso 2. No hay que esperar a tenerlo completo.
+- Personal credentials per person, never shared. A team token destroys the traceability of who
+  approved what.
+- A local copy of every repository the cycle touches, including the standards one.
+- A catalog readable by machine, versioned, with a format validator.
+- A low-friction place to record false positives, outside the rule approval process. If
+  recording a false positive cost an approval, nobody would record one.
+- A branch convention that links to the ticket, so traceability resolves without asking.
+- A correlation id propagated end to end, and a declared retention period.
+- A place for the dossier to live, readable by people and by machine.
 
 ---
 
-## 12. Antipatrones
+## 11. Adoption
 
-**El asistente que ejecuta solo.** Publica, abre cambios o toca ambientes sin aprobación.
-Basta un error visible para que el equipo pierda la confianza y vuelva a hacer todo a mano.
+In this order. Each step works without the ones after it, and none requires the previous one to
+be perfect.
 
-**La cadena sin gates.** Un ciclo que corre de punta a punta sin intervención humana produce
-código sin dueño, y nadie puede responder por qué se hizo así.
+1. **The standards catalog, empty.** With a rule format, a validator and a generated catalog.
+   Empty on purpose: a set copied from an industry guide describes whoever copied it.
+2. **The pre-review.** It returns the most for what it costs and forces nobody else to change
+   how they work.
+3. **The change review, with harvesting inside it.** Both together. An assisted review that
+   does not harvest leaves the cycle open.
+4. **The functional verification script.** Cheap, and it draws a clear line between review and
+   QA.
+5. **Refinement and design.** Once the catalog holds rules worth consulting before settling an
+   architecture.
+6. **Operations and SRE.** Requires the data sources to exist and be trustworthy, usually the
+   longest work of all.
+7. **Gate 0, definition and requirements.** They depend on product picking up the habit, and
+   that cannot be decreed.
+8. **Outcome validation.** Last, because it needs trustworthy business data and the willingness
+   to record that a hypothesis failed.
 
-**El catálogo poblado de una vez.** Cincuenta reglas copiadas de una guía genérica. Nadie las
-reconoce como propias y el equipo aprende a ignorar los hallazgos.
-
-**La cosecha manual.** Un comando que alguien debería correr cuando se acuerde. No ocurre.
-
-**La revisión de una sola pasada.** Las decisiones aparecen al resolver los hilos, y para
-entonces ya nadie está mirando.
-
-**El descarte silencioso.** Rechazar un hallazgo sin registrar el motivo.
-
-**La regla sin origen.** Una norma que nadie puede rastrear se vuelve a discutir cada vez.
-
-**La observabilidad como tarea posterior.** El primer incidente se diagnostica a ciegas.
-
-**La alerta que nadie atiende.** Entrena al equipo a ignorar el canal completo.
-
-**El criterio no funcional sin número.** No se verifica en QA ni se vigila en producción, así
-que en la práctica no se exigió nada.
-
-**El asistente que opina sobre producción sin datos.** Un diagnóstico sin fuentes es una
-conjetura bien redactada, que es peor que no tener ninguno.
-
-**El expediente que se abandona.** Si una etapa deja de escribir en él, la siguiente vuelve a
-preguntar lo que ya se había respondido, y la cadena se rompe sin que nadie lo note.
+The framework pays from step 2. There is no need to wait for the whole thing.
 
 ---
 
-## Sobre el nombre
+## 12. Anti-patterns
 
-**CAUCE** — Ciclo Asistido Unificado de Construcción y Entrega.
+**The assistant that acts on its own.** Publishes, opens changes or touches environments
+without approval. One visible mistake is enough for the team to lose trust and go back to doing
+everything by hand.
 
-La idea que le da sentido, y que conviene repetir cuando alguien pregunte de qué se trata: la
-asistencia de IA sin cauce es una crecida, y con cauce es un río. La misma fuerza, encauzada.
+**The chain with no gates.** A cycle that runs end to end without human intervention produces
+code with no owner, and nobody can answer why it was done that way.
 
-Los nombres de las skills están en español a propósito. Un equipo adopta antes un vocabulario
-que ya habla.
+**The catalog filled in one sitting.** Fifty rules copied from a generic guide. Nobody
+recognises them as their own and the team learns to ignore the findings.
+
+**Manual harvesting.** A command someone should run when they remember. It does not happen.
+
+**The single-pass review.** Decisions appear when threads get resolved, and by then nobody is
+looking.
+
+**The silent discard.** Rejecting a finding without recording the reason.
+
+**The rule with no origin.** A norm nobody can trace gets re-argued every time it appears.
+
+**Observability as a later task.** The first incident is diagnosed blind.
+
+**The alert nobody acts on.** It trains the team to ignore the whole channel.
+
+**The non-functional criterion with no number.** It cannot be verified in QA or watched in
+production, so in practice nothing was required.
+
+**The assistant opining on production without data.** A diagnosis with no sources is a
+well-written guess, which is worse than none.
+
+**The abandoned dossier.** If one stage stops writing to it, the next one asks again what was
+already answered, and the chain breaks without anyone noticing.
+
+---
+
+## About the name
+
+**CAUCE** — Cycle of Assisted, Unified Construction and Engineering.
+
+*Cauce* is a Spanish word: the bed of a river, the channel that gives water its direction. The
+idea worth repeating when someone asks what this is about: AI assistance without a channel is a
+flood; with one, it is a river. The same force, channelled.

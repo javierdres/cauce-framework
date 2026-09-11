@@ -1,44 +1,44 @@
 ---
 skill: cauce
-etapa: 0
-nombre: Puerta de entrada
-gatillada_por: [persona]
-gatilla: [definir]
-gate: ninguno
-habilita_el_gate: —
-escribe_fuera: [ticket]
-consulta: []
+stage: 0
+name: Entry point
+triggered_by: [person]
+triggers: [define]
+gate: none
+gate_owner: —
+writes_outside: [ticket]
+consults: []
 ---
 
-# /cauce — Puerta de entrada
+# /cauce — Entry point
 
-## Propósito
+## Purpose
 
-Recibir una necesidad en cualquier formato y abrir el expediente que va a acompañar al trabajo por todo el ciclo.
+Take in a need in any format and open the dossier that will travel with the work through the whole cycle.
 
-## Precondiciones
+## Preconditions
 
-Acceso al sistema de tickets y al historial de trabajos anteriores.
+Access to the issue tracker and to the history of previous work.
 
-## Qué hace
+## What it does
 
-- Clasifica el tipo de trabajo: proyecto nuevo, cambio sobre algo existente, o incidente. De esa clasificación depende por qué etapa entra la cadena.
-- Identifica quién pide y para qué. Es lo único que no puede faltar; todo lo demás lo levanta la etapa 1 preguntando.
-- Busca si ya existe un expediente o un ticket sobre lo mismo, y en ese caso lo actualiza en vez de abrir uno nuevo.
-- Abre el expediente y lo deja enlazado al ticket.
+- Classifies the type of work: new project, change to something that exists, or incident. That classification decides which stage the chain enters at.
+- Identifies who is asking and what for. That is the only thing that cannot be missing; stage 1 gathers everything else by asking.
+- Checks whether a dossier or ticket already covers the same thing, and updates it instead of opening a duplicate.
+- Opens the dossier and links it to the ticket.
 
-## Qué NO hace
+## What it does NOT do
 
-- No define el problema ni propone solución.
-- No prioriza ni estima.
-- No abre el ticket sin aprobación de quien pide.
+- Does not define the problem or propose a solution.
+- Does not prioritise or estimate.
+- Does not open the ticket without approval from whoever asked.
 
 ## Gate
 
-Ninguno. Esta skill no detiene la cadena.
+None. This skill does not stop the chain.
 
-## Expediente
+## Dossier
 
-**Lee:** Necesidad en cualquier formato: nota, correo, transcripción, ticket de soporte.
+**Reads:** A need in any format: a note, an email, a transcript, a support ticket.
 
-**Escribe:** Expediente abierto, con quién pide, para qué y de qué tipo es el trabajo.
+**Writes:** An open dossier, with who is asking, what for, and what type of work it is.
