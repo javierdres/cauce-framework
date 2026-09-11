@@ -77,6 +77,9 @@ What the person hands over at stage 0 can be as informal as a transcribed voice 
 forwarded email. What **cannot** be missing is who is asking and what for. The first stage
 gathers everything else by asking.
 
+Each of those three chains is walked step by step in [START-HERE.md](START-HERE.md), with what
+it changes compared with working without the framework, and what it costs.
+
 ### The dossier
 
 Stage 0 produces a **dossier**: a single artefact that travels with the work through the whole

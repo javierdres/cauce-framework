@@ -16,6 +16,13 @@ learning loop. No audio; the narration script is in [docs/video-script.md](docs/
 
 ## Where to start
 
+**[START-HERE.md](START-HERE.md)** answers the three questions that actually come first: how do
+I start a new project, how do I start a new requirement on an existing one, and how do I
+resolve an incident. Each with what it changes compared with how you do it today, and what it
+costs.
+
+## The reference
+
 [GATE.md](GATE.md) is the full document. If you have ten minutes, read section 2 (the single
 entry point and the dossier) and section 6 (the actors, and the line between what the AI does
 and what people do).
@@ -23,6 +30,7 @@ and what people do).
 ## What is here
 
 ```
+├── START-HERE.md       The three ways in, and what each one changes
 ├── GATE.md             The full framework
 ├── CONTRIBUTING.md     How the framework itself changes
 ├── skills/             The 16 skills, each with its contract
