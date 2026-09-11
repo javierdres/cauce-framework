@@ -8,6 +8,12 @@ Agnostic of company, domain, language and platform.
 
 Assistance that stops where judgement begins.
 
+## In 95 seconds
+
+[docs/GATE.webm](docs/GATE.webm) walks through the whole framework: the problem, the five
+moments of human invocation, the line between what the AI does and what people do, and the
+learning loop. No audio; the narration script is in [docs/video-script.md](docs/video-script.md).
+
 ## Where to start
 
 [GATE.md](GATE.md) is the full document. If you have ten minutes, read section 2 (the single
@@ -27,7 +33,8 @@ and what people do).
 │   └── build_pdf.py    Regenerates the PDF from the Markdown
 └── docs/
     ├── GATE.pdf        The document as PDF
-    └── video-script.md Narration script for the explainer video
+    ├── GATE.webm       95-second explainer, no audio
+    └── video-script.md Narration script for that video
 ```
 
 ## What is deliberately not here
