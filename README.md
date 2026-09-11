@@ -17,14 +17,17 @@ and what people do).
 ## What is here
 
 ```
-├── GATE.md            The full framework
+├── GATE.md             The full framework
+├── CONTRIBUTING.md     How the framework itself changes
 ├── skills/             The 16 skills, each with its contract
 ├── templates/          Dossier, design decision, QA script, postmortem, rule
+├── adoption/           How to roll it out, step by step
 ├── bin/
 │   ├── validate.py     Checks the contracts are complete and the chain closes
 │   └── build_pdf.py    Regenerates the PDF from the Markdown
-├── adoption/           How to roll it out, step by step
-└── docs/GATE.pdf      The document as PDF
+└── docs/
+    ├── GATE.pdf        The document as PDF
+    └── video-script.md Narration script for the explainer video
 ```
 
 ## What is deliberately not here

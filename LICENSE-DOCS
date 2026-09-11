@@ -1,13 +1,13 @@
-Los contenidos de documentación de este repositorio (CAUCE.md, README.md,
-skills/, plantillas/, adopcion/ y docs/) se publican bajo Creative Commons
-Atribución 4.0 Internacional (CC BY 4.0).
+The documentation in this repository (GATE.md, README.md, CONTRIBUTING.md,
+skills/, templates/, adoption/ and docs/) is published under the Creative
+Commons Attribution 4.0 International licence (CC BY 4.0).
 
-Copyright (c) 2026 Javier Núñez
+Copyright (c) 2026 Javier Nunez
 
-Resumen legible: https://creativecommons.org/licenses/by/4.0/deed.es
-Texto legal oficial: https://creativecommons.org/licenses/by/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by/4.0/
+Official legal text:    https://creativecommons.org/licenses/by/4.0/legalcode
 
-El código de bin/ se publica por separado bajo licencia MIT. Ver LICENSE.
+The code under bin/ is published separately under the MIT licence. See LICENSE.
 
 =======================================================================
 

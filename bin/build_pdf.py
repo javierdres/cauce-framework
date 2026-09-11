@@ -80,7 +80,7 @@ h2 { break-before: auto; }
 """
 
 doc = """<!doctype html><html lang="es"><head><meta charset="utf-8">
-<title>Ciclo de vida de desarrollo asistido por IA</title>
+<title>GATE — Governed, Assisted, Traceable Engineering</title>
 <style>%s</style></head><body>%s</body></html>""" % (CSS, body)
 io.open(OUT_HTML, "w", encoding="utf-8").write(doc)
 print("HTML written")
