@@ -465,7 +465,7 @@ Reports what is filled, what blocks the start, and which stage is waiting on eac
 Not before the second project, and not before somebody actually needs a cross-project answer.
 
 The moment it earns its place is when the question from the end of this section appears: which
-projects satisfy rule RD-0007. Answering that needs a list of the projects pointing at a
+projects satisfy rule HR-0007. Answering that needs a list of the projects pointing at a
 catalog, and that list is a registry.
 
 Built earlier, it is a list nobody reads that drifts from reality. The declaration comes first;
@@ -524,7 +524,7 @@ affected projects' leads, a standards group, or whoever your organisation alread
 cross-cutting decisions.
 
 **Compliance becomes a question you have to be able to answer.** Which projects satisfy rule
-RD-0007. With one project you know from memory. With twenty you need to report it, and the
+HR-0007. With one project you know from memory. With twenty you need to report it, and the
 framework does not provide that today: the catalog says what the rule is and the dossier says
 what was applied to one change, but nothing aggregates the two across projects.
 

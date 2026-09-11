@@ -16,6 +16,21 @@ Assistance that stops where judgement begins.
 moments of human invocation, the line between what the AI does and what people do, and the
 learning loop. No audio; the narration script is in [docs/video-script.md](docs/video-script.md).
 
+## Getting started
+
+Two commands to scaffold what every team needs before the first run:
+
+```
+python3 bin/bootstrap.py catalog ../our-standards
+python3 bin/bootstrap.py config  ../our-project
+```
+
+The first writes a complete standards catalog repository, empty of rules on purpose. The second
+drops `.gate/config.yml` into a project, filling in what it can read off the repository.
+
+Then `python3 bin/check_config.py ../our-project/.gate/config.yml` tells you which eight fields
+still block the start.
+
 ## Where to start
 
 **[START-HERE.md](START-HERE.md)** answers the three questions that actually come first: how do
@@ -40,6 +55,7 @@ and what people do).
 ├── templates/          Project config, dossier, design decision, QA script, postmortem, rule
 ├── adoption/           How to roll it out, step by step
 ├── bin/
+│   ├── bootstrap.py    Scaffolds the standards catalog and a project's config
 │   ├── validate.py     Checks the contracts are complete and the chain closes
 │   ├── check_config.py Reports what a project's .gate/config.yml is missing
 │   └── build_pdf.py    Regenerates the PDF from the Markdown

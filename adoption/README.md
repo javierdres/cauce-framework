@@ -3,15 +3,35 @@
 In this order. Each step works without the ones after it, and none requires the previous one to
 be perfect.
 
+## 0. Scaffold what everyone needs anyway
+
+The standards catalog is identical for anyone starting out, and so is the shape of a project's
+config. Neither is worth building by hand.
+
+```
+python3 bin/bootstrap.py catalog ../our-standards
+python3 bin/bootstrap.py config  ../the-project-you-picked
+```
+
+The first writes a complete catalog repository: rule format, validator, catalog generator,
+false-positive record, governance and contributing guides. Empty of rules, on purpose.
+
+The second drops `.gate/config.yml` into your project, filling in whatever it can read off the
+repository — its remotes, its branch convention, its lint and test commands — and leaving the
+rest for `/init` to ask about.
+
+- [ ] Catalog scaffolded, `python3 bin/validate.py` clean inside it
+- [ ] Catalog repository created and committed
+- [ ] `.gate/config.yml` in the project you picked
+
 ## 1. The standards catalog, empty
 
-A repository of your own, with a rule format, a validator and a generated catalog. Empty on
-purpose: a set copied from an industry guide describes whoever copied it, not your
-organisation.
+Empty on purpose: a set copied from an industry guide describes whoever copied it, not your
+organisation. What matters now is that it exists and that rules can only enter through
+`/harvest`, traceable to a real decision.
 
-- [ ] Repository created, using the format in `templates/rule.md`
-- [ ] Format validator running
-- [ ] A low-friction place to record false positives, outside the rule approval process
+- [ ] Custodians named, before the first hard rule rather than during the argument about it
+- [ ] Everyone knows rules are harvested, not written
 
 ## 2. The pre-review
 

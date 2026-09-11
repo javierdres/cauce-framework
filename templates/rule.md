@@ -1,7 +1,8 @@
 ---
-id: RD-0000
+id: HR-0000
 title: A short phrase naming the rule, not justifying it
 severity: hard | soft
+# hard rules are HR-NNNN in rules/hard/, soft ones SR-NNNN in rules/soft/
 status: candidate
 scope: [cross-cutting]
 projects: [cross-cutting]
@@ -12,7 +13,7 @@ created: YYYY-MM-DD
 updated: YYYY-MM-DD
 ---
 
-# RD-0000 — Title
+# HR-0000 — Title
 
 ## Do not
 What is forbidden, concretely. If you cannot point at it in a change, it is not a rule yet.

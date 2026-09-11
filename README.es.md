@@ -16,6 +16,21 @@ Asistencia que se detiene donde empieza el criterio.
 de invocación humana, la línea entre lo que hace la IA y lo que hacen las personas, y el lazo de
 aprendizaje. Sin audio; el guion está en [docs/video-script.md](docs/video-script.md).
 
+## Para arrancar
+
+Dos comandos que arman lo que cualquier equipo necesita antes de la primera corrida:
+
+```
+python3 bin/bootstrap.py catalog ../nuestros-estandares
+python3 bin/bootstrap.py config  ../nuestro-proyecto
+```
+
+El primero escribe un repositorio de catálogo completo, vacío de reglas a propósito. El segundo
+deja el `.gate/config.yml` en un proyecto, completando lo que puede leer del repositorio.
+
+Después `python3 bin/check_config.py ../nuestro-proyecto/.gate/config.yml` te dice cuáles de los
+ocho campos siguen bloqueando el arranque.
+
 ## Por dónde empezar
 
 **[START-HERE.es.md](START-HERE.es.md)** responde las tres preguntas que de verdad vienen primero: cómo inicio un proyecto nuevo, cómo inicio un requerimiento nuevo sobre uno existente, y
@@ -38,6 +53,7 @@ lo que hacen las personas).
 ├── templates/          Config de proyecto, expediente, decisión de diseño, guion de QA, postmortem, regla
 ├── adoption/           Cómo implantarlo, paso a paso
 ├── bin/
+│   ├── bootstrap.py    Arma el catálogo de estándares y la config de un proyecto
 │   ├── validate.py     Comprueba que los contratos estén completos y la cadena cierre
 │   ├── check_config.py Reporta qué le falta al .gate/config.yml de un proyecto
 │   └── build_pdf.py    Regenera el PDF desde el Markdown
