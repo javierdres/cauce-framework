@@ -1,3 +1,5 @@
+> **English** · [Español](README.es.md)
+
 # GATE
 
 **Governed, Assisted, Traceable Engineering.** An AI-assisted SDLC framework: it defines the
@@ -31,6 +33,7 @@ and what people do).
 
 ```
 ├── START-HERE.md       The three ways in, and what each one changes
+├── START-HERE.es.md    The same, in Spanish
 ├── GATE.md             The full framework
 ├── CONTRIBUTING.md     How the framework itself changes
 ├── skills/             The 16 skills, each with its contract
