@@ -55,11 +55,11 @@ Requires the data sources to exist and be trustworthy, usually the longest work 
 - [ ] A rollback procedure exercised, not merely documented
 - [ ] `/operate` and `/postmortem` implemented
 
-## 7. Gate 0, definition and requirements
+## 7. Stage 0, definition and requirements
 
 They depend on product picking up the habit, and that cannot be decreed.
 
-- [ ] `/cauce`, `/define` and `/specify` implemented
+- [ ] `/intake`, `/define` and `/specify` implemented
 - [ ] The dossier adopted as the only source of context
 
 ## 8. Outcome validation

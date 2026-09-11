@@ -4,7 +4,7 @@ import io, os, re, subprocess, sys, html
 import markdown
 
 D = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SRC = os.path.join(D, sys.argv[1]) if len(sys.argv) > 1 else os.path.join(D, "CAUCE.md")
+SRC = os.path.join(D, sys.argv[1]) if len(sys.argv) > 1 else os.path.join(D, "GATE.md")
 BASE = os.path.splitext(os.path.basename(SRC))[0]
 OUT_HTML = os.path.join(D, "_%s.html" % BASE)
 MMD = os.path.join(D, "_mmd_%s" % BASE)

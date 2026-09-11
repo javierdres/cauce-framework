@@ -1,5 +1,5 @@
 ---
-skill: cauce
+skill: intake
 stage: 0
 name: Entry point
 triggered_by: [person]
@@ -10,7 +10,7 @@ writes_outside: [ticket]
 consults: []
 ---
 
-# /cauce — Entry point
+# /intake — Entry point
 
 ## Purpose
 

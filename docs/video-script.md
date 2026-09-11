@@ -1,6 +1,6 @@
 # Narration script — framework video
 
-The video (`nunez.info/cauce`, 91 seconds) has no audio. This is the text to record over it,
+The video (`nunez.info/intake`, 91 seconds) has no audio. This is the text to record over it,
 with the timing of each scene.
 
 A comfortable pace is about 2.5 words per second. Each block is measured to sit inside its
@@ -10,7 +10,7 @@ scene with room to spare, leaving silence at the end.
 
 **0:00 – 0:07 · Title**
 
-> CAUCE. Cycle of Assisted, Unified Construction and Engineering. A software development life
+> GATE. Cycle of Assisted, Unified Construction and Engineering. A software development life
 > cycle framework with AI assistance.
 
 **0:07 – 0:21 · The problem**
@@ -30,7 +30,7 @@ scene with room to spare, leaving silence at the end.
 
 > A flood and a river hold the same water. The difference is the channel.
 >
-> CAUCE adds no capability to the assistant. It orders the ones it already has.
+> GATE adds no capability to the assistant. It orders the ones it already has.
 
 **0:28 – 0:42 · The journey**
 
@@ -86,7 +86,7 @@ scene with room to spare, leaving silence at the end.
 
 **1:22 – 1:31 · Close**
 
-> CAUCE is in use and under continuous improvement. The full document, the skill contracts and
+> GATE is in use and under continuous improvement. The full document, the skill contracts and
 > the templates are published and free to use.
 
 ---

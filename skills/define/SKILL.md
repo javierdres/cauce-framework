@@ -2,7 +2,7 @@
 skill: define
 stage: 1
 name: Definition
-triggered_by: [cauce]
+triggered_by: [intake]
 triggers: [specify]
 gate: product gate
 gate_owner: Product owner

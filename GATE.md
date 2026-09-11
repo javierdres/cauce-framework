@@ -1,6 +1,6 @@
-# CAUCE
+# GATE
 
-### Cycle of Assisted, Unified Construction and Engineering
+### Governed, Assisted, Traceable Engineering
 
 **An AI-assisted SDLC framework.** A software development life cycle that defines the stages,
 their inputs and outputs, the human control points and the actors of each one.
@@ -10,8 +10,7 @@ Technical reference document, agnostic of company, domain, language and platform
 It covers the whole journey: from someone raising a need to the system running in production,
 with the organisation having learned something from doing it.
 
-*Cauce* is Spanish for the bed of a river — the channel that gives water its direction. A
-flood and a river hold the same water. The difference is the channel.
+Assistance that stops where judgement begins.
 
 [TOC]
 
@@ -28,7 +27,7 @@ compliance arrive once the code is written, which is the most expensive moment. 
 auditable: there is no way to answer which standard was applied to a change, who approved it,
 or since when it has been in force.
 
-CAUCE adds no new capability to the assistant. It orders the ones it already has into stages
+GATE adds no new capability to the assistant. It orders the ones it already has into stages
 with an input, an output and an owner, with explicit points where a person decides, and with
 mechanisms that turn every decision and every incident into a reusable standard.
 
@@ -37,7 +36,7 @@ chaining into the next step, and not depending on someone remembering.
 
 ### What kind of framework this is, and what it does not replace
 
-CAUCE is an **SDLC**: it describes the life cycle of a software product, from the need to
+GATE is an **SDLC**: it describes the life cycle of a software product, from the need to
 retirement, with the stages, artefacts and controls of each leg. It sits in the same family as
 the classic life cycle models and as continuous integration and delivery practice.
 
@@ -47,7 +46,7 @@ discretion. Here every stage declares what the machine produces, what the person
 what gets written down for the next stage.
 
 **It does not replace how you organise the team.** Scrum, Kanban or whatever you use to
-prioritise, plan and coordinate keeps working on top of CAUCE. This framework defines no
+prioritise, plan and coordinate keeps working on top of GATE. This framework defines no
 ceremonies, no cadence, no estimation, and no backlog shaping. It defines the journey of a
 piece of work and who clears each step.
 
@@ -57,14 +56,14 @@ alternatives to them.
 
 ---
 
-## 2. Gate 0: the single entry point
+## 2. Stage 0: the single entry point
 
-CAUCE has **one door**. A person raises a need, a request or a new project, and everything
+GATE has **one door**. A person raises a need, a request or a new project, and everything
 else chains from there.
 
 ```mermaid
 flowchart TD
-    H(["PERSON<br/>raises a need,<br/>a request<br/>or a new project"]) --> S0["<b>GATE 0</b><br/>entry skill<br/>opens the dossier"]
+    H(["PERSON<br/>raises a need,<br/>a request<br/>or a new project"]) --> S0["<b>STAGE 0</b><br/>intake skill<br/>opens the dossier"]
     S0 --> C{"What is it?"}
     C -->|"new project"| P["Long chain:<br/>stages 1 to 12"]
     C -->|"change to<br/>something existing"| Q["Short chain:<br/>enters at stage 2 or 3<br/>with the system's dossier<br/>already loaded"]
@@ -74,13 +73,13 @@ flowchart TD
     R --> E
 ```
 
-What the person hands over at Gate 0 can be as informal as a transcribed voice note or a
+What the person hands over at stage 0 can be as informal as a transcribed voice note or a
 forwarded email. What **cannot** be missing is who is asking and what for. The first stage
 gathers everything else by asking.
 
 ### The dossier
 
-Gate 0 produces a **dossier**: a single artefact that travels with the work through the whole
+Stage 0 produces a **dossier**: a single artefact that travels with the work through the whole
 cycle, accumulating what each stage produces. It is what lets the stages chain without anyone
 retyping the context.
 
@@ -115,7 +114,7 @@ with no owner. The gates are the product, not the obstacle.
 
 ## 3. Principles
 
-They apply to every stage. An implementation that breaks one stops being CAUCE.
+They apply to every stage. An implementation that breaks one stops being GATE.
 
 **The assistant prepares, the person decides.** The assistant does the heavy lifting: reading,
 correlating, drafting, checking. Every consequential decision belongs to a person, and is taken
@@ -155,7 +154,7 @@ whoever was in the meeting.
 
 ```mermaid
 flowchart LR
-    A(["Gate 0<br/>single<br/>entry point"]) --> P1
+    A(["Stage 0<br/>single<br/>entry point"]) --> P1
 
     P1["<b>PRODUCT</b><br/>1 · Definition<br/>2 · Requirements"]
     P2["<b>ENGINEERING</b><br/>3 · Refinement<br/>4 · Design<br/>5 · Development<br/>6 · Pre-review<br/>7 · Change review<br/>8 · Functional verification"]
@@ -183,13 +182,13 @@ A requirement that collides with a rule in force is caught before the first line
 
 ## 5. The skills, named
 
-Fourteen cycle skills and two cross-cutting ones. The names are CAUCE's proposal; what is not
+Fourteen cycle skills and two cross-cutting ones. The names are GATE's proposal; what is not
 negotiable is each one's contract: who triggers it, what it takes in, what it delivers, and
 where it stops to ask.
 
 ```mermaid
 flowchart TD
-    H1(["person"]) ==> K0["/cauce<br/>GATE 0"]
+    H1(["person"]) ==> K0["/intake<br/>stage 0"]
     K0 --> K1["/define"]
     K1 --> G1{"product gate"}
     G1 --> K2["/specify"]
@@ -232,8 +231,8 @@ someone decides.
 
 | Skill | Stage | Triggered by | Delivers | Writes outside, on approval |
 |---|---|---|---|---|
-| `/cauce` | 0 | **Person** | Dossier opened and classified by type of work | Ticket |
-| `/define` | 1 | `/cauce` | Problem, context, data classification | Ticket |
+| `/intake` | 0 | **Person** | Dossier opened and classified by type of work | Ticket |
+| `/define` | 1 | `/intake` | Problem, context, data classification | Ticket |
 | `/specify` | 2 | `/define` | Acceptance and compliance criteria | Ticket |
 | `/refine` | 3 | `/specify` | Components, risks with owners, test and observability plans | Subtasks |
 | `/design` | 4 | `/refine` | Contrasted alternatives and a recorded decision | Decision record |
@@ -252,7 +251,7 @@ invents them on the fly, and invents them differently every time.
 
 ### The five moments of human invocation
 
-People start the chain at five points, and only five: when the need is born (`/cauce`), when
+People start the chain at five points, and only five: when the need is born (`/intake`), when
 someone sits down to build (`/build`), when someone reviews (`/review`), when someone tests
 (`/verify`) and when someone deploys (`/deploy`). The framework chains everything else.
 
@@ -373,7 +372,7 @@ fast, and can converge with great confidence on the wrong answer, because the as
 the wrong thing as fluently as the right one.
 
 The three incompatibilities exist for exactly that. A team that cuts headcount and also relaxes
-them is not applying CAUCE: it is automating its own bias, faster than before.
+them is not applying GATE: it is automating its own bias, faster than before.
 
 ---
 
@@ -646,7 +645,7 @@ incident timeline by hand, and drafting the postmortem nobody will reread.
 
 That work is necessary and it is mechanical. It is exactly where assistance pays.
 
-### What changes with CAUCE
+### What changes with GATE
 
 Mechanical work collapses and **the bottleneck moves to judgement**. What used to take an
 afternoon of drafting becomes a review of something already drafted. The gates stop being
@@ -677,7 +676,7 @@ confidently, because the assistant writes the wrong thing as fluently as the rig
 The countermeasure is in the design: that pre-review and change review are never the same
 person, that the product and engineering gates are held by someone who did not write what is
 being approved, and that no rule reaches blocking status without the team's approval. A team
-that cuts people and also relaxes those three points is not applying CAUCE: it is automating
+that cuts people and also relaxes those three points is not applying GATE: it is automating
 its own bias.
 
 ---
@@ -738,7 +737,7 @@ be perfect.
    architecture.
 6. **Operations and SRE.** Requires the data sources to exist and be trustworthy, usually the
    longest work of all.
-7. **Gate 0, definition and requirements.** They depend on product picking up the habit, and
+7. **Stage 0, definition and requirements.** They depend on product picking up the habit, and
    that cannot be decreed.
 8. **Outcome validation.** Last, because it needs trustworthy business data and the willingness
    to record that a hypothesis failed.
@@ -785,8 +784,14 @@ already answered, and the chain breaks without anyone noticing.
 
 ## About the name
 
-**CAUCE** — Cycle of Assisted, Unified Construction and Engineering.
+**GATE** — Governed, Assisted, Traceable Engineering.
 
-*Cauce* is a Spanish word: the bed of a river, the channel that gives water its direction. The
-idea worth repeating when someone asks what this is about: AI assistance without a channel is a
-flood; with one, it is a river. The same force, channelled.
+Four words, each carrying its own weight. *Governed*: a person clears every control point.
+*Assisted*: the machine does the reading, the correlating and the drafting. *Traceable*: the
+dossier answers what was asked, what standard was applied and who approved it. *Engineering*:
+the scope is building and running software, not organising the team.
+
+The word itself is the thesis. While most of the field is selling autonomous agents, this
+framework sells the places where the work stops and a person decides.
+
+Every gate in it exists because something, somewhere, once went through without one.

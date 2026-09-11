@@ -1,6 +1,6 @@
-# Contributing to CAUCE
+# Contributing to GATE
 
-CAUCE is in use and under continuous improvement. The most valuable contributions come from
+GATE is in use and under continuous improvement. The most valuable contributions come from
 having applied it, not from having read it.
 
 ## What helps most
@@ -19,7 +19,7 @@ missing, add it with what it cost.
 Specific standard rules. The catalog belongs to each organisation and lives in its own
 repository: this framework defines how it is fed, not what it says.
 
-Ceremonies, cadence or estimation. CAUCE describes the journey of a piece of work and who
+Ceremonies, cadence or estimation. GATE describes the journey of a piece of work and who
 clears each step; how you organise the team sits outside.
 
 Generic good practice with no decision behind it. If you cannot trace it to something that
@@ -33,10 +33,10 @@ Run the validator. It checks the contracts are complete and the trigger chain cl
 python3 bin/validate.py
 ```
 
-If you touched `CAUCE.md`, regenerate the PDF.
+If you touched `GATE.md`, regenerate the PDF.
 
 ```
-python3 bin/build_pdf.py CAUCE.md
+python3 bin/build_pdf.py GATE.md
 ```
 
 ## Licence of contributions
