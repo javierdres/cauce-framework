@@ -56,7 +56,7 @@ triggers B, B has to say it is triggered by A.
 
 ## The five moments of human invocation
 
-`/intake` when the need is born. `/build` when someone sits down to implement. `/review` when
+`/init` when the need is born. `/build` when someone sits down to implement. `/review` when
 someone reviews, several times. `/verify` when someone tests. `/deploy` when someone deploys.
 
 The framework chains everything else. Mechanisms that depend on a person remembering to invoke

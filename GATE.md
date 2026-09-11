@@ -63,7 +63,7 @@ else chains from there.
 
 ```mermaid
 flowchart TD
-    H(["PERSON<br/>raises a need,<br/>a request<br/>or a new project"]) --> S0["<b>STAGE 0</b><br/>intake skill<br/>opens the dossier"]
+    H(["PERSON<br/>raises a need,<br/>a request<br/>or a new project"]) --> S0["<b>STAGE 0</b><br/>init skill<br/>opens the dossier"]
     S0 --> C{"What is it?"}
     C -->|"new project"| P["Long chain:<br/>stages 1 to 12"]
     C -->|"change to<br/>something existing"| Q["Short chain:<br/>enters at stage 2 or 3<br/>with the system's dossier<br/>already loaded"]
@@ -188,7 +188,7 @@ where it stops to ask.
 
 ```mermaid
 flowchart TD
-    H1(["person"]) ==> K0["/intake<br/>stage 0"]
+    H1(["person"]) ==> K0["/init<br/>stage 0"]
     K0 --> K1["/define"]
     K1 --> G1{"product gate"}
     G1 --> K2["/specify"]
@@ -231,8 +231,8 @@ someone decides.
 
 | Skill | Stage | Triggered by | Delivers | Writes outside, on approval |
 |---|---|---|---|---|
-| `/intake` | 0 | **Person** | Dossier opened and classified by type of work | Ticket |
-| `/define` | 1 | `/intake` | Problem, context, data classification | Ticket |
+| `/init` | 0 | **Person** | Dossier opened and classified by type of work | Ticket |
+| `/define` | 1 | `/init` | Problem, context, data classification | Ticket |
 | `/specify` | 2 | `/define` | Acceptance and compliance criteria | Ticket |
 | `/refine` | 3 | `/specify` | Components, risks with owners, test and observability plans | Subtasks |
 | `/design` | 4 | `/refine` | Contrasted alternatives and a recorded decision | Decision record |
@@ -251,7 +251,7 @@ invents them on the fly, and invents them differently every time.
 
 ### The five moments of human invocation
 
-People start the chain at five points, and only five: when the need is born (`/intake`), when
+People start the chain at five points, and only five: when the need is born (`/init`), when
 someone sits down to build (`/build`), when someone reviews (`/review`), when someone tests
 (`/verify`) and when someone deploys (`/deploy`). The framework chains everything else.
 

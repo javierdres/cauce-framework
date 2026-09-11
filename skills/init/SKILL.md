@@ -1,5 +1,5 @@
 ---
-skill: intake
+skill: init
 stage: 0
 name: Entry point
 triggered_by: [person]
@@ -10,7 +10,7 @@ writes_outside: [ticket]
 consults: []
 ---
 
-# /intake — Entry point
+# /init — Entry point
 
 ## Purpose
 

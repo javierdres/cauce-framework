@@ -1,6 +1,6 @@
 # Narration script — framework video
 
-The video (`nunez.info/intake`, 91 seconds) has no audio. This is the text to record over it,
+The video (`nunez.info/init`, 91 seconds) has no audio. This is the text to record over it,
 with the timing of each scene.
 
 A comfortable pace is about 2.5 words per second. Each block is measured to sit inside its
@@ -10,8 +10,8 @@ scene with room to spare, leaving silence at the end.
 
 **0:00 – 0:07 · Title**
 
-> GATE. Cycle of Assisted, Unified Construction and Engineering. A software development life
-> cycle framework with AI assistance.
+> GATE. Governed, Assisted, Traceable Engineering. An AI-assisted software development life
+> cycle.
 
 **0:07 – 0:21 · The problem**
 
@@ -28,7 +28,7 @@ scene with room to spare, leaving silence at the end.
 
 **0:21 – 0:28 · The thesis**
 
-> A flood and a river hold the same water. The difference is the channel.
+> Assistance that stops where judgement begins.
 >
 > GATE adds no capability to the assistant. It orders the ones it already has.
 

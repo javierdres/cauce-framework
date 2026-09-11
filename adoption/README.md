@@ -59,7 +59,7 @@ Requires the data sources to exist and be trustworthy, usually the longest work 
 
 They depend on product picking up the habit, and that cannot be decreed.
 
-- [ ] `/intake`, `/define` and `/specify` implemented
+- [ ] `/init`, `/define` and `/specify` implemented
 - [ ] The dossier adopted as the only source of context
 
 ## 8. Outcome validation
