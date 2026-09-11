@@ -2,8 +2,8 @@
 
 # Por dónde empezar
 
-Tres formas de entrar a GATE, una por situación. Cada una dice qué haces, dónde se detiene, con
-qué te quedas, y **qué cambia respecto de cómo lo haces hoy**.
+Tres formas de entrar a GATE, una por situación. Cada una dice qué haces, dónde se detiene, qué obtienes
+y **en qué se diferencia de cómo trabajas hoy**.
 
 Si solo vas a leer una cosa sobre GATE, lee esta.
 
@@ -17,8 +17,8 @@ Si solo vas a leer una cosa sobre GATE, lee esta.
 /init
 ```
 
-Entregas lo que tengas: una nota de voz transcrita, un correo reenviado, una conversación con
-alguien de negocio. Lo único que no puede faltar es **quién pide y para qué**.
+Entregas lo que tengas a mano: una nota de voz transcrita, un correo reenviado, una conversación
+con alguien de negocio. Lo único que no puede faltar es **quién pide y para qué**.
 
 `/init` lo clasifica como proyecto nuevo y abre el expediente. Desde ahí la cadena corre larga,
 etapas 1 a 12.
@@ -35,24 +35,24 @@ siguiente.
 cada criterio no funcional lleva número. Sin número, vuelve.
 
 **Gates técnico y de diseño**, después de `/refine` y `/design`. Los riesgos reciben dueño. Se
-contrastan dos alternativas de arquitectura, y elige alguien que no escribió la propuesta.
+contrastan dos alternativas de arquitectura, y quien elige no es quien escribió la propuesta.
 
-### Con qué te quedas
+### Qué obtienes
 
 Un expediente que ya tiene el problema, los criterios, los componentes afectados, los riesgos
 con dueño, el plan de pruebas, el plan de observabilidad, y un registro de decisión que nombra
 qué se descartó y por qué.
 
-### Qué cambia respecto de hoy
+### En qué se diferencia de hoy
 
 Hoy la necesidad se describe en una reunión, un equipo estima, se empieza a trabajar, y el
 contexto vive en la cabeza de la gente. Las decisiones se toman en hilos de chat y desaparecen
 un mes después.
 
-Tres ganancias concretas. **La clasificación de datos existe desde el día uno**, así que el
+Tres mejoras concretas. **La clasificación de datos existe desde el día uno**, así que el
 cumplimiento no se agrega a la fuerza cuando el sistema ya maneja datos personales. **Los
-criterios no funcionales llevan número**, así QA tiene qué verificar en la etapa 8 y producción
-qué vigilar en la 10; "que sea rápido" no verifica nada. Y **la decisión de arquitectura queda
+criterios no funcionales llevan número**, así QA tiene algo que verificar en la etapa 8 y producción
+algo que vigilar en la 10; "que sea rápido" no verifica nada. Y **la decisión de arquitectura queda
 registrada con sus alternativas**, así dentro de un año nadie tiene que reconstruir por qué se
 construyó de esta manera.
 
@@ -82,24 +82,24 @@ se salta.
 Después lo de siempre: `/build`, `/self-review` en privado, `/review` con otra persona,
 `/verify`, `/deploy`.
 
-### Con qué te quedas
+### Qué obtienes
 
 Un mapa de impacto hecho leyendo el código real, los riesgos que ese cambio introduce, y las
 reglas del catálogo que aplican a lo que vas a tocar.
 
-### Qué cambia respecto de hoy
+### En qué se diferencia de hoy
 
 Hoy aparece un ticket en el backlog, alguien lo toma, grepea un rato para averiguar qué afecta,
-y construye. El impacto se adivina desde el recuerdo del sistema.
+y construye. El impacto se deduce de lo que recuerda del sistema.
 
-Tres ganancias. **El mapa de impacto se lee, no se recuerda**, y un mapa hecho de memoria se
-equivoca justo en los sistemas que más cambiaron. **El catálogo se consulta antes de elegir un
+Tres mejoras. **El mapa de impacto se lee, no se recuerda**, y un mapa hecho de memoria se
+equivoca justo en los sistemas que más han cambiado. **El catálogo se consulta antes de elegir un
 patrón**, así dejas de redescubrir reglas que el equipo ya acordó y de volver a discutirlas en
-la revisión. Y **la revisión previa atrapa en privado** lo que si no atraparía un colega en
-público, que es más rápido y cuesta menos socialmente.
+la revisión. Y **la revisión previa detecta en privado** lo que de otro modo detectaría un colega en
+público, que es más rápido y cuesta menos.
 
-Lo que cuesta: una aprobación antes de construir, y escribir un mapa de impacto que igual
-llevabas en la cabeza.
+Lo que cuesta: una aprobación antes de construir, y escribir un mapa de impacto que de todos modos
+ya llevabas en la cabeza.
 
 ---
 
@@ -128,53 +128,53 @@ Al cerrar el incidente, `/postmortem` reconstruye la línea de tiempo **desde la
 desde la memoria de quien estuvo de turno, y separa la causa raíz de los factores que
 contribuyeron.
 
-### Con qué te quedas
+### Qué obtienes
 
 Un diagnóstico con evidencia, un postmortem con línea de tiempo trazable, y la causa raíz
 entregada a `/harvest`, que la convierte en regla candidata.
 
-### Qué cambia respecto de hoy
+### En qué se diferencia de hoy
 
 Hoy alguien se da cuenta, varios se suman, se arregla, y si hay postmortem se escribe de
-memoria y nadie lo relee. La misma clase de falla vuelve seis meses después.
+memoria y después nadie lo relee. La misma clase de falla vuelve seis meses después.
 
-Dos ganancias, y la segunda es el punto entero. **La línea de tiempo se reconstruye desde las
-fuentes**, así la causa raíz es la real y no la historia más plausible contada a la mañana
+Dos mejoras, y la segunda es lo que de verdad importa. **La línea de tiempo se reconstruye desde las
+fuentes**, así la causa raíz es la real y no la versión más plausible contada a la mañana
 siguiente. Y **la causa raíz se convierte en una regla que aplica a los cambios futuros**: ese
 es el único camino por el que un incidente deja de repetirse, en vez de quedar en el recuerdo
 de quien estuvo ahí.
 
-Lo que cuesta: el postmortem no es opcional, y la cosecha corre tenga ganas alguien o no.
+Lo que cuesta: el postmortem deja de ser opcional, y la cosecha se ejecuta tenga ganas alguien o no.
 
 ---
 
-## Qué te gana GATE, en una tabla
+## Lo que ganas con GATE
 
-| | Cómo suele ser | Con GATE |
+| | Cómo suele ocurrir | Con GATE |
 |---|---|---|
-| Contexto entre etapas | Se reconstruye en cada reunión de traspaso | Viaja en el expediente |
-| Impacto de un cambio | Se adivina desde el recuerdo del sistema | Se lee del código |
+| Contexto entre etapas | Se reconstruye en cada reunión de traspaso | Viaja dentro del expediente |
+| Impacto de un cambio | Se deduce de lo que uno recuerda | Se lee directamente del código |
 | Criterios de aceptación | Prosa, no verificable | Con número, verificable en QA y en producción |
 | Decisiones de arquitectura | En un hilo de chat, perdidas en un mes | Registradas con lo que se descartó |
-| Revisión | Depende de quién revisó y de su día | Dos pasadas distintas, una privada y una pública |
-| Un hallazgo rechazado | Se vuelve a discutir el mes siguiente | Queda con su motivo, no se levanta otra vez |
-| Un incidente | Se arregla, y vuelve | La causa raíz se vuelve regla que bloquea la clase |
+| Revisión | Depende de quién revisó y de cómo venía ese día | Dos pasadas distintas, una privada y una pública |
+| Un hallazgo rechazado | Se vuelve a discutir el mes siguiente | Queda registrado con su motivo y no se repite |
+| Un incidente | Se arregla y vuelve a ocurrir | La causa raíz pasa a ser una regla que bloquea ese tipo de falla |
 | Cumplimiento | Se agrega cuando ya es caro | Datos clasificados en la etapa 1 |
-| "¿Esto sirvió?" | Nadie pregunta | La etapa 11 pregunta, con datos |
-| Auditoría | Nadie puede responder | El expediente responde |
+| ¿Esto sirvió de algo? | Nadie lo pregunta | La etapa 11 lo pregunta, con datos |
+| Auditoría | Nadie sabe responder | El expediente lo responde |
 
 ---
 
-## Lo que cuesta, dicho sin adornos
+## Lo que cuesta
 
 **Aprobaciones que antes no estaban.** Tres para un proyecto nuevo, una para un cambio. Cada
 una es una persona leyendo algo ya redactado, pero es tiempo que antes no existía.
 
 **Escribir lo que antes vivía en cabezas.** El mapa de impacto, la decisión de diseño, los
-riesgos con dueño. Se paga desde la segunda vez que tocas el mismo sistema, no desde la
+riesgos con dueño. Se recupera desde la segunda vez que tocas el mismo sistema, no desde la
 primera.
 
-**Disciplina en el lazo.** Si `/harvest` no corre, el catálogo queda vacío y GATE se vuelve
+**Disciplina en el lazo.** Si `/harvest` no corre, el catálogo queda vacío y GATE se convierte en
 burocracia sin retorno. Por eso lo dispara la revisión y no la memoria de alguien.
 
 ---

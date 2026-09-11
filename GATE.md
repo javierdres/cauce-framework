@@ -102,6 +102,20 @@ retyping the context.
 | 11 · Validation | Outcome measured against the stage 1 problem |
 | 12 · Learning | Rules harvested, discards with their reason, pending decisions |
 
+```mermaid
+flowchart LR
+    D0(["empty"]) --> D1["<b>PRODUCT</b><br/>problem · data class.<br/>criteria · compliance"]
+    D1 --> D2["<b>ENGINEERING</b><br/>components · risks · plans<br/>decision · changes · tests<br/>findings · threads · QA result"]
+    D2 --> D3["<b>OPERATIONS</b><br/>post-deploy check<br/>incidents · root causes<br/>outcome vs the problem"]
+    D3 --> D4["<b>LEARNING</b><br/>rules · discards<br/>pending decisions"]
+
+    style D0 fill:#eeeeee,stroke:#999999
+    style D4 fill:#d7f0e9,stroke:#00b49c
+```
+
+Nothing on that line is rewritten. Each stage adds and none re-asks. That is the point: context
+stops being rebuilt at every handover.
+
 The dossier is also the audit record. It answers what was asked for, which standard was
 applied, who approved each step, and on what evidence.
 
@@ -191,40 +205,22 @@ where it stops to ask.
 
 ```mermaid
 flowchart TD
-    H1(["person"]) ==> K0["/init<br/>stage 0"]
-    K0 --> K1["/define"]
-    K1 --> G1{"product gate"}
-    G1 --> K2["/specify"]
-    K2 --> G2{"requirements gate"}
-    G2 --> K3["/refine"]
-    K3 --> G3{"engineering gate"}
-    G3 --> K4["/design"]
-    K4 --> G4{"design gate"}
-
-    G4 --> H2(["builder"])
-    H2 ==> K5["/build"]
+    H1(["person"]) ==> K0["/init"]
+    K0 --> A["/define · /specify<br/>/refine · /design"]
+    A --> G1{"4 gates: product<br/>and engineering"}
+    G1 ==> K5["person: /build"]
     K5 --> K6["/self-review"]
-    K6 --> G5{"author gate"}
-
-    G5 --> H3(["reviewer"])
-    H3 ==> K7["/review"]
-    K7 --> G6{"reviewer gate"}
-    K7 -.-> K13["/harvest"]
-
-    K6 --> K8["/verify"]
-    G6 --> H4(["tester"])
-    H4 ==> K8
-    K8 --> G7{"QA gate"}
-
-    G7 --> H5(["deployer"])
-    H5 ==> K9["/deploy"]
-    K9 --> K10["/operate"]
-    K10 --> K11["/postmortem"]
-    K11 -.-> K13
-    K9 --> K12["/validate-outcome"]
-    K12 --> G8{"product gate"}
-    K13 --> G9{"per-rule gate"}
+    K6 --> G2{"author gate"}
+    G2 ==> K7["person: /review<br/>run on every pass"]
+    K7 -.->|"every pass"| K13["/harvest"]
+    K7 --> G3{"reviewer gate"}
+    G3 ==> K8["person: /verify"]
+    K8 --> G4{"QA gate"}
+    G4 ==> K9["person: /deploy"]
+    K9 --> B["/operate · /postmortem<br/>/validate-outcome"]
+    B -.-> K13
 ```
+
 
 Thick arrows come out of a person: those are the **five moments of human invocation**. Thin
 ones are chained by the framework. Dotted ones feed learning. Diamonds stop the chain until
@@ -299,6 +295,20 @@ Four things a person always does, and the AI never:
 
 When one of the four on the right moves to the left, the framework stops applying, however
 unchanged everything else looks.
+
+```mermaid
+flowchart LR
+    M["<b>THE MACHINE</b><br/>reads every repository<br/>drafts the artefact<br/>checks against the source<br/>carries the dossier forward"]
+    P["<b>A PERSON</b><br/>accepts or rejects<br/>chooses what is given up<br/>authorises every shared write<br/>answers for the outcome"]
+    M -->|"hands over a draft"| P
+    P -->|"clears the gate"| M
+
+    style M fill:#eef7fb,stroke:#5a86a8
+    style P fill:#fdf3e6,stroke:#c98b00
+```
+
+The loop between those two boxes is the framework. The machine never crosses into the second
+one, and a person never has to do the first one by hand.
 
 ### The eight roles
 
@@ -595,20 +605,23 @@ Make what was learned outlive the conversation or the shift where it appeared. *
 one destination.**
 
 ```mermaid
-flowchart LR
-    A["Resolved threads<br/>from a review"] --> C{"Decision with an<br/>explicit outcome?"}
+flowchart TD
+    A["Resolved threads<br/>from a review"] --> C
     B["Root cause of<br/>an incident"] --> C
-    C -->|no| D["Pending:<br/>reported, not written"]
-    C -->|yes| E{"Does it hold<br/>beyond this case?"}
+    C{"Decision with an<br/>explicit outcome?"}
+    C -->|no| D["Pending: reported,<br/>not written"]
+    C -->|yes| E{"Does it hold beyond<br/>this case?"}
     E -->|no| F["One-off fix"]
-    E -->|yes| G{"Does it describe how<br/>this project is built?"}
-    G -->|yes| H["Project<br/>documentation"]
-    G -->|no| I{"Generic practice with no<br/>decision of our own?"}
+    E -->|yes| G{"Describes how this<br/>project is built?"}
+    G -->|yes| H["Project documentation"]
+    G -->|no| I{"Generic practice, no<br/>decision of our own?"}
     I -->|yes| J["Already covered by<br/>the industry baseline"]
     I -->|no| K{"Already in<br/>the catalog?"}
     K -->|yes| L["Edit the existing one:<br/>add origin and history"]
     K -->|no| M["New candidate rule"]
+    style M fill:#d7f0e9,stroke:#00b49c
 ```
+
 
 An incident is as good a source of rules as a discussion, and usually yields better ones:
 nobody argues with a root cause that already cost an outage.
@@ -647,6 +660,39 @@ at refinement, reading the whole change to review it, writing the test script, r
 incident timeline by hand, and drafting the postmortem nobody will reread.
 
 That work is necessary and it is mechanical. It is exactly where assistance pays.
+
+**One change, the usual way**
+
+```mermaid
+flowchart TD
+    A1["ticket appears"] --> A2["grep around to<br/>guess the impact"]
+    A2 --> A3["build"]
+    A3 --> A4["write the description,<br/>read the whole diff"]
+    A4 --> A5["discuss, fix, merge"]
+    A5 --> A6(["the decision stays in the thread<br/>and is gone in a month"])
+    style A6 fill:#f6f2f0,stroke:#a98b7d
+```
+
+
+**The same change, with GATE**
+
+```mermaid
+flowchart TD
+    B1["/init loads the dossier"] --> B2["/refine maps the impact<br/>by reading the code"]
+    B2 --> B3{"engineering gate"}
+    B3 --> B4["/build and /self-review draft<br/>the change and the QA script"]
+    B4 --> B5["/review: the reviewer judges,<br/>does not re-read"]
+    B5 --> B6(["/harvest turns the decision into a rule<br/>that applies to the next change"])
+    style B6 fill:#d7f0e9,stroke:#00b49c
+```
+
+
+The mechanical steps on the first line — grepping for impact, writing the description, reading
+the whole diff — are the ones that collapse. What does not collapse is the judgement: the gate
+in the middle and the reviewer near the end.
+
+And the last step on the second line has no equivalent on the first. That is where the
+compounding comes from: the same discussion does not happen twice.
 
 ### What changes with GATE
 

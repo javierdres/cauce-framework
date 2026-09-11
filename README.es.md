@@ -18,8 +18,7 @@ aprendizaje. Sin audio; el guion está en [docs/video-script.md](docs/video-scri
 
 ## Por dónde empezar
 
-**[START-HERE.es.md](START-HERE.es.md)** responde las tres preguntas que vienen primero de
-verdad: cómo inicio un proyecto nuevo, cómo inicio un requerimiento nuevo sobre uno existente, y
+**[START-HERE.es.md](START-HERE.es.md)** responde las tres preguntas que de verdad vienen primero: cómo inicio un proyecto nuevo, cómo inicio un requerimiento nuevo sobre uno existente, y
 cómo resuelvo una incidencia. Cada una con qué cambia respecto de cómo lo haces hoy, y qué
 cuesta.
 
@@ -29,7 +28,7 @@ cuesta.
 (la puerta de entrada y el expediente) y la 6 (los actores, y la línea entre lo que hace la IA y
 lo que hacen las personas).
 
-## Qué hay acá
+## Qué contiene
 
 ```
 ├── START-HERE.es.md    Las tres formas de entrar, y qué cambia cada una
@@ -47,7 +46,7 @@ lo que hacen las personas).
     └── video-script.md Guion de narración de ese video
 ```
 
-## Qué no hay acá, a propósito
+## Qué no contiene, a propósito
 
 **Las reglas de tu organización.** El catálogo de estándares es de cada organización y vive en
 su propio repositorio. Este framework define cómo se alimenta ese catálogo, no qué dice.
@@ -57,7 +56,7 @@ habilita cada paso. Scrum, Kanban o lo que uses para organizar al equipo sigue f
 encima.
 
 **Las implementaciones de las skills.** Cada una declara su contrato: quién la gatilla, qué
-entrega, dónde se detiene a preguntar. Conectarlo a tus herramientas es tu parte.
+entrega, dónde se detiene a preguntar. Conectarlo con tus herramientas te corresponde a ti.
 
 ## Las skills
 
@@ -82,7 +81,7 @@ invocarlos no ocurren.
 
 ## De dónde sale
 
-GATE no es una recopilación bibliográfica. Sale de dirigir equipos de desarrollo y de ver, una y
+GATE no nace de una recopilación bibliográfica. Sale de dirigir equipos de desarrollo y de ver, una y
 otra vez, los mismos cuatro problemas: la calidad dependiendo de quién usó el asistente ese día,
 las decisiones evaporándose entre conversaciones, la seguridad entrando tarde, y nadie capaz de
 responder qué vara se aplicó a un cambio.
@@ -105,12 +104,11 @@ Autor y titular: **Javier Núñez**.
 | Documentación: `GATE.md`, `README.md`, `skills/`, `templates/`, `adoption/`, `docs/` | [CC BY 4.0](LICENSE-DOCS) |
 | Código: `bin/` | [MIT](LICENSE) |
 
-Puedes usar GATE en tu organización, adaptarlo y redistribuirlo, incluso comercialmente. Lo
-único que se pide es atribución.
+Puedes usar GATE en tu organización, adaptarlo y redistribuirlo, incluso comercialmente. Lo único
+que se pide a cambio es la atribución.
 
 ### Sobre el nombre
 
 La licencia cubre la obra, no el nombre. Si adaptas GATE para tu organización, úsalo con
 libertad. Si publicas un derivado con cambios sustanciales en las etapas, los gates o la
-separación entre lo que hace la IA y lo que hacen las personas, ponle otro nombre y menciona de
-dónde viene: así "GATE" sigue significando una sola cosa.
+separación entre lo que hace la IA y lo que hacen las personas, ponle otro nombre y menciona su procedencia: así "GATE" sigue significando una sola cosa.
