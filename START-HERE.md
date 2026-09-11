@@ -20,7 +20,16 @@ If you only read one thing about GATE, read this.
 Hand over whatever you have: a transcribed voice note, a forwarded email, a conversation with
 a stakeholder. The only thing that cannot be missing is **who is asking and what for**.
 
-`/init` classifies it as a new project and opens the dossier. From there the chain runs the
+The first thing `/init` does is read `.gate/config.yml`. On a new project it does not exist, so
+it creates it from the template, fills in what it can detect from the repository, and asks for
+the eight fields required to start: the organisation, its catalog, where false positives are
+recorded, the project id, its repositories, the branch convention, the tracker and where
+dossiers live. Nothing else happens until those are answered.
+
+The rest of the config stays empty and that is fine: each field is tagged with the stage that
+needs it, and an empty one declares that stage is not in use yet.
+
+Then `/init` classifies it as a new project and opens the dossier. From there the chain runs the
 long way, stages 1 to 12.
 
 ### Where it stops

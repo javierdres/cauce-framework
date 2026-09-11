@@ -20,7 +20,16 @@ Si solo vas a leer una cosa sobre GATE, lee esta.
 Entregas lo que tengas a mano: una nota de voz transcrita, un correo reenviado, una conversación
 con alguien de negocio. Lo único que no puede faltar es **quién pide y para qué**.
 
-`/init` lo clasifica como proyecto nuevo y abre el expediente. Desde ahí la cadena corre larga,
+Lo primero que hace `/init` es leer `.gate/config.yml`. En un proyecto nuevo no existe, así que
+lo crea desde la plantilla, completa lo que puede detectar del repositorio, y pregunta por los
+ocho campos necesarios para arrancar: la organización, su catálogo, dónde se registran los
+falsos positivos, el identificador del proyecto, sus repositorios, la convención de ramas, el
+gestor de tickets y dónde viven los expedientes. Nada más ocurre hasta que estén respondidos.
+
+El resto de la config queda vacío y está bien: cada campo lleva marcada la etapa que lo
+necesita, y dejarlo vacío declara que esa etapa todavía no está en uso.
+
+Después `/init` lo clasifica como proyecto nuevo y abre el expediente. Desde ahí la cadena corre larga,
 etapas 1 a 12.
 
 ### Dónde se detiene

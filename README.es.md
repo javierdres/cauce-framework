@@ -35,10 +35,11 @@ lo que hacen las personas).
 ├── GATE.md             El framework completo
 ├── CONTRIBUTING.md     Cómo cambia el framework mismo
 ├── skills/             Las 16 skills, cada una con su contrato
-├── templates/          Expediente, decisión de diseño, guion de QA, postmortem, regla
+├── templates/          Config de proyecto, expediente, decisión de diseño, guion de QA, postmortem, regla
 ├── adoption/           Cómo implantarlo, paso a paso
 ├── bin/
 │   ├── validate.py     Comprueba que los contratos estén completos y la cadena cierre
+│   ├── check_config.py Reporta qué le falta al .gate/config.yml de un proyecto
 │   └── build_pdf.py    Regenera el PDF desde el Markdown
 └── docs/
     ├── GATE.pdf        El documento en PDF

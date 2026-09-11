@@ -431,6 +431,46 @@ lesson twenty times.
 Scoping is what keeps that from becoming noise: a rule carries `projects`, so it applies where
 it belongs and stays out of stacks it has nothing to say about.
 
+### How a project declares where it belongs
+
+GATE does not create the organisation. The organisation already exists: it has a name, an
+identity provider, a git group and someone accountable for compliance. Inventing a parallel
+notion of it would duplicate something real and the two would drift apart.
+
+What the framework does require is that **every project declares which one it belongs to**, in
+a `.gate/config.yml` at its root. Three of its fields settle the relationship: which catalog it
+reads, who approves its hard rules, and what regulatory context applies.
+
+From that, the organisation follows by construction: **two projects reading the same catalog
+are the same organisation**. Nothing else defines it, and nothing else needs to. The standards
+repository is already the only thing they share, so it is what identifies them.
+
+The config is also where the cycle finds everything else it needs: the repositories a piece of
+work may touch, the branch convention, the lint and test commands, the data sources, the
+rollback procedure and who clears each gate. `/init` reads it before anything, fills in what it
+can detect from the repository, and stops until the fields required to start are filled.
+
+It does not have to be complete to begin. Each field is tagged with the stage that needs it,
+and leaving one empty is a valid declaration that the stage using it is not in use yet. Eight
+fields are enough to start; the rest arrive with the stages.
+
+```
+python3 bin/check_config.py .gate/config.yml
+```
+
+Reports what is filled, what blocks the start, and which stage is waiting on each gap.
+
+### When a registry becomes worth it
+
+Not before the second project, and not before somebody actually needs a cross-project answer.
+
+The moment it earns its place is when the question from the end of this section appears: which
+projects satisfy rule RD-0007. Answering that needs a list of the projects pointing at a
+catalog, and that list is a registry.
+
+Built earlier, it is a list nobody reads that drifts from reality. The declaration comes first;
+the registry is a consequence of a reporting need, never the starting point.
+
 ### Isolated contexts
 
 A service that shares nothing with the rest still enters through `/init` and runs the same

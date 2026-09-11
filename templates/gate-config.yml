@@ -1,0 +1,109 @@
+# .gate/config.yml — the project's declaration
+#
+# /init reads this first. If it is missing or has empty required fields, /init
+# fills in what it can detect and asks for the rest before opening any dossier.
+#
+# Each field is tagged with the stage that needs it. You do not need a complete
+# file to start: stage 0 needs eight fields, and the rest can stay empty until
+# the stage that uses them arrives. Leaving a field empty is a declaration that
+# the stage depending on it is not in use yet.
+
+organisation:
+  # [stage 0, required] Its name. Purely for humans.
+  name: ""
+
+  # [stage 0, required] The standards catalog this project reads.
+  # Two projects pointing at the same catalog are, by construction, the same
+  # organisation. This is the only thing that defines that relationship.
+  catalog: ""
+
+  # [stage 0, required] Where rejected findings are recorded, so they are not
+  # raised again. Usually inside the catalog repository.
+  false_positives: ""
+
+  # [stage 12, required to promote a hard rule] Who approves one. A group or a
+  # role, never a single name: at more than one project this stops being one
+  # person.
+  hard_rule_approvers: ""
+
+  # [stage 1, required if the project handles regulated data] What applies to
+  # this organisation: a regulation, an internal policy, a client contract.
+  # Feeds the data classification and the retention periods.
+  regulatory_context: ""
+
+project:
+  # [stage 0, required] Its identifier, the one the tickets use.
+  id: ""
+
+  # [stage 0, required] Every repository a piece of work may touch. More than
+  # one is normal and forgetting one is how a change ends up half done.
+  repositories: []
+
+  # [stage 0, required] How a branch links to its ticket, as a pattern.
+  # Without this the cycle cannot resolve traceability without asking.
+  branch_convention: ""
+
+  # [stage 0, required] Where the tickets live.
+  tracker: ""
+
+  # [stage 0, required] Where the dossiers live. Readable by people and by
+  # machine.
+  dossiers: ""
+
+  # [stage 3, required] The document describing how this codebase is built:
+  # its patterns, its stack, its deliberate exceptions. What /refine and
+  # /self-review read to check conventions against the code instead of
+  # assuming them.
+  definition: ""
+
+tooling:
+  # [stage 6, required] Commands the pre-review runs. A syntax error is
+  # blocking, so these have to actually run.
+  lint: []
+  static_analysis: []
+  tests: []
+
+  # [stage 6, optional] Anything else worth running before human review.
+  extra_checks: []
+
+data_sources:
+  # [stage 10, required to operate] Where each one lives. An assistant with no
+  # access to these offers opinions; with access, it diagnoses.
+  application_logs: ""
+  infrastructure_logs: ""
+  metrics: ""
+  traces: ""
+  audit_trail: ""
+  external_dependencies: ""
+
+  # [stage 10, required] The field carrying the correlation id end to end.
+  # Without it each source tells a different story.
+  correlation_id: ""
+
+  # [stage 10, required] How long data is kept. An incident investigated three
+  # days later needs data from three days ago. Comes from regulatory_context.
+  retention: ""
+
+operations:
+  # [stage 9, required to deploy] Where the rollback procedure is documented,
+  # and when it was last actually exercised. A procedure never run is a
+  # hypothesis.
+  rollback_procedure: ""
+  rollback_last_exercised: ""
+
+  # [stage 2, required for non-functional criteria] How long the service
+  # tolerates being down, and how much data it tolerates losing. With numbers.
+  recovery_time_objective: ""
+  recovery_point_objective: ""
+
+gates:
+  # [stage 0, recommended] Who clears each gate, as a role or a group rather
+  # than a name. The three incompatibilities have to hold: whoever builds does
+  # not review the same change, whoever proposes a design does not accept it,
+  # and whoever builds does not validate the business outcome.
+  product: ""
+  engineering: ""
+  design: ""
+  review: ""
+  qa: ""
+  deployment: ""
