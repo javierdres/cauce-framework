@@ -389,7 +389,112 @@ them is not applying GATE: it is automating its own bias, faster than before.
 
 ---
 
-## 7. The stages
+## 7. Scopes: one framework, many contexts
+
+An organisation rarely has one product. It has products, services, internal tools and the odd
+isolated system that shares nothing with the rest. And a consultancy has several organisations
+at once.
+
+GATE is the same door for all of them. What changes is not the cycle: it is **where each thing
+lives**.
+
+### The four levels
+
+```mermaid
+flowchart TD
+    F["<b>THE FRAMEWORK</b><br/>stages · skill contracts · templates<br/>gates · role incompatibilities"]
+    O["<b>THE ORGANISATION</b><br/>standards catalog · false-positive record<br/>skill implementations · custodians<br/>regulatory context"]
+    P["<b>THE PROJECT</b><br/>how this codebase is built · data sources<br/>project-scoped rules"]
+    W["<b>THE WORK ITEM</b><br/>one dossier"]
+
+    F -->|"read-only,<br/>pinned to a version"| O
+    O -->|"one catalog,<br/>however many projects"| P
+    P -->|"one per piece<br/>of work"| W
+
+    style F fill:#eef7fb,stroke:#5a86a8
+    style O fill:#d7f0e9,stroke:#00b49c
+    style W fill:#f6f2f0,stroke:#a98b7d
+```
+
+| Level | What lives there | How many |
+|---|---|---|
+| Framework | The method: stages, contracts, templates, gates | One, for everybody |
+| Organisation | Catalog, false positives, skill implementations, custodians | One per organisation |
+| Project | How that codebase is built, its data sources, its own rules | One per product or service |
+| Work item | The dossier | One per piece of work |
+
+**One catalog per organisation, not one per project.** This is the decision that matters most.
+With a catalog per project, a rule learned in one never reaches another, and the compounding
+that pays for the whole framework disappears. You would have twenty silos learning the same
+lesson twenty times.
+
+Scoping is what keeps that from becoming noise: a rule carries `projects`, so it applies where
+it belongs and stays out of stacks it has nothing to say about.
+
+### Isolated contexts
+
+A service that shares nothing with the rest still enters through `/init` and runs the same
+thirteen stages. It is simply a project whose rules never leave project scope.
+
+That is not a lesser case. Being able to run the cycle on something isolated, with no catalog
+worth speaking of and no other project to learn from, is what makes GATE usable on day one, by
+one team, before any of this topology exists.
+
+### What travels, and what never does
+
+**Only a rule travels upward.** Everything else stays where it was created.
+
+A rule is born scoped to the project where it was harvested. It reaches organisation scope when
+there is evidence it applied in a second project, and that promotion is a human decision
+recorded in the catalog like any other.
+
+Four things **never** cross an organisation boundary, and this is not a preference:
+
+- **Dossiers.** They carry the client's problem, their data classification and their incidents.
+- **Data sources.** Logs, metrics and audit trails belong to whoever owns the system.
+- **Credentials.** Personal, per person, per organisation.
+- **The project definition.** It describes a codebase that belongs to someone.
+
+For a consultancy this is the line that keeps one client's material out of another's. It is
+worth stating in the contract, not just in a document.
+
+### Between organisations
+
+The framework is shared: it is public and identical for everyone. The catalogs are not.
+
+A rule does not cross from one organisation's catalog to another automatically, ever. Risk
+appetite, regulation and legal exposure differ, and a hard rule that is right for one can be
+wrong or simply inapplicable for the next.
+
+What does travel is a person carrying a lesson. The mechanism is to **propose** it in the other
+organisation's catalog as a candidate, with the origin pointing at where it was learned. It
+then goes through that organisation's own approval like any other candidate.
+
+### Governance once there are many projects
+
+Three things change, and none of them is technical.
+
+**The custodian stops being a person.** With one project, whoever knows the codebase can hold
+the standard. With twenty it needs a small group, and a rule for what happens when they
+disagree.
+
+**"The whole team approves hard rules" needs a definition.** The framework says a hard rule
+requires the team's approval. Once there is no single team, you have to say which one: the
+affected projects' leads, a standards group, or whoever your organisation already trusts with
+cross-cutting decisions.
+
+**Compliance becomes a question you have to be able to answer.** Which projects satisfy rule
+RD-0007. With one project you know from memory. With twenty you need to report it, and the
+framework does not provide that today: the catalog says what the rule is and the dossier says
+what was applied to one change, but nothing aggregates the two across projects.
+
+That gap is real and it is named here rather than glossed over. The cheapest honest answer for
+now is that each project's pre-review already reads the catalog, so non-compliance surfaces on
+the next change to that project rather than on a report.
+
+---
+
+## 8. The stages
 
 ### Stage 1 · Definition
 
@@ -650,7 +755,7 @@ does not need the stage, and usually has the problem of never switching anything
 
 ---
 
-## 8. Effect on the organisation
+## 9. Effect on the organisation
 
 ### Where the time goes today
 
@@ -730,7 +835,7 @@ its own bias.
 
 ---
 
-## 9. What improves, and how to check it
+## 10. What improves, and how to check it
 
 Without indicators, this is a well-written opinion.
 
@@ -755,7 +860,7 @@ other eleven say.
 
 ---
 
-## 10. Preconditions
+## 11. Preconditions
 
 - Personal credentials per person, never shared. A team token destroys the traceability of who
   approved what.
@@ -769,7 +874,7 @@ other eleven say.
 
 ---
 
-## 11. Adoption
+## 12. Adoption
 
 In this order. Each step works without the ones after it, and none requires the previous one to
 be perfect.
@@ -795,7 +900,7 @@ The framework pays from step 2. There is no need to wait for the whole thing.
 
 ---
 
-## 12. Anti-patterns
+## 13. Anti-patterns
 
 **The assistant that acts on its own.** Publishes, opens changes or touches environments
 without approval. One visible mistake is enough for the team to lose trust and go back to doing

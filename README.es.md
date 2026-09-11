@@ -49,7 +49,9 @@ lo que hacen las personas).
 ## Qué no contiene, a propósito
 
 **Las reglas de tu organización.** El catálogo de estándares es de cada organización y vive en
-su propio repositorio. Este framework define cómo se alimenta ese catálogo, no qué dice.
+su propio repositorio, uno por organización por muchos proyectos que tenga. Este framework
+define cómo se alimenta ese catálogo, no qué dice. La sección 7 del documento explica cómo
+encajan los niveles.
 
 **Ceremonias, cadencia ni estimación.** GATE describe el recorrido de un trabajo y quién
 habilita cada paso. Scrum, Kanban o lo que uses para organizar al equipo sigue funcionando

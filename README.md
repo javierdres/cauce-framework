@@ -51,7 +51,9 @@ and what people do).
 ## What is deliberately not here
 
 **Your organisation's rules.** The standards catalog belongs to each organisation and lives in
-its own repository. This framework defines how that catalog is fed, not what it says.
+its own repository, one per organisation however many projects it has. This framework defines
+how that catalog is fed, not what it says. See
+[section 7](GATE.md#7-scopes-one-framework-many-contexts) for how the levels fit together.
 
 **Ceremonies, cadence or estimation.** GATE describes the journey of a piece of work and who
 clears each step. Scrum, Kanban or whatever you use to organise the team keeps working on top.
